@@ -1,24 +1,5 @@
 import Image from 'next/image';
 
-const BUSINESS_STEPS = [
-  {
-    heading: 'Tell Us What You Need',
-    content: 'Fill out a quick 2 minutes form to describe your requirements.',
-  },
-  {
-    heading: 'We find a perfect Match',
-    content: 'Our Team will review your request and find a match.',
-  },
-  {
-    heading: 'Interview and Hire',
-    content: 'Meet candidates, make offers and start immediately.',
-  },
-  {
-    heading: 'Work Starts',
-    content: 'Fully trained, equipped, and ready to start working.',
-  },
-];
-
 const WORKERS_STEPS = [
   {
     heading: 'Tell us about yourself',

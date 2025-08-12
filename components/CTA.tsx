@@ -28,9 +28,9 @@ export default function CTA() {
               Ready to get started?
             </h3>
             <p className="max-w-[591px] text-sm sm:text-base">
-              Whether you're a skilled worker looking for opportunities or a
+              {`Whether you're a skilled worker looking for opportunities or a
               business needing talent, we're here to help you succeed. Let's
-              start the conversation today.
+              start the conversation today.`}
             </p>
           </div>
 
