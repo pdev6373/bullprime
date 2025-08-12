@@ -136,7 +136,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="flex justify-between items-center gap-5 sm:gap-8 flex-wrap py-6 border-t border-t-[#E6E5E7] sm:px-4">
+      <div className="flex justify-between items-center gap-5 sm:gap-8 flex-wrap py-6 border-t-[1px] border-t-[#E6E5E7] sm:px-4">
         <p>Copyright © Bull Prime Services Limited 2025</p>
 
         <span className="flex flex-col gap-2 min-[400px]:flex-row min-[400px]:gap-1">

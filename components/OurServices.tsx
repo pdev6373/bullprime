@@ -1,88 +1,143 @@
 import Image from 'next/image';
 
-const WORKERS_STEPS = [
+const SERVICES = [
   {
-    heading: 'Tell us about yourself',
-    content: 'Fill out a quick 2 minutes form to describe your skills.',
+    image: '/pngs/service.png',
+    heading: 'Construction Staffing',
+    content:
+      'Building the right team for your projects. We supply skilled and semi-skilled workers for construction sites, ranging from general labourers to qualified tradespeople. Our candidates undergo thorough vetting to ensure they have the expertise and safety awareness required for demanding construction environments.',
+    cta: 'hire-now',
   },
   {
-    heading: 'Get Verified',
-    content: 'Our Team will reach out for verification & accreditation.',
+    image: '/pngs/service.png',
+    heading: 'Warehousing Staff',
+    content:
+      'Reliable staffing for smooth supply chain operations. Our warehousing recruitment solutions ensure your logistics operations never face staff shortages. We supply trained personnel who can seamlessly integrate into your existing processes, improving efficiency and productivity',
+    cta: 'learn-more',
   },
   {
-    heading: 'Interview and Hire',
-    content: 'Get Matched to available jobs from our Job List.',
+    image: '/pngs/service.png',
+    heading: 'Training & Compliance',
+    content:
+      'Empowering workers with skills and certifications. We believe a prepared workforce is a successful workforce. That’s why we offer training and compliance support to ensure candidates meet industry standards before stepping on site. This not only benefits businesses but also boosts workers’ confidence and career growth.',
+    cta: 'call-us-now',
   },
 ];
 
 export default function OurServices() {
   return (
-    <section
-      className="bg-[#131057] py-24 text-[#010013] flex justify-center"
-      style={{
-        paddingInline: 'max(6.25vw, 20px)',
-      }}
-    >
-      <div className="w-full flex flex-col gap-28">
-        <div className="flex gap-4">
-          <Image
-            width={59}
-            height={27}
-            alt={'icon'}
-            src={'/svgs/section-icon.svg'}
-          />
-          <p className="text-xl font-semibold">How it Works</p>
-        </div>
+    <div className="relative bg-[#131057] py-8 pb-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 text-[#FAFAF7]">
+      <div className="absolute top-0 left-0 right-0 z-10">
+        <Image
+          alt="cta"
+          width={1440}
+          height={28}
+          src="/svgs/line-one.svg"
+          className="w-full"
+        />
+        <Image
+          alt="cta"
+          width={1440}
+          height={28}
+          src="/svgs/line-two.svg"
+          className="w-full"
+        />
+      </div>
 
-        <div className="w-full max-w-[815px] mx-auto flex flex-col gap-8">
-          <div className="flex justify-between items-end">
-            <div className="flex flex-col gap-2">
-              <h3 className="text-3xl font-semibold tracking-[-2%] max-w-[427px]">
-                <span className="text-[#1462FF]">For Workers:</span> Better
-                Jobs, Higher Pay, Faster Placement
+      <section
+        className="flex justify-center"
+        style={{
+          paddingInline: 'max(6.25vw, 20px)',
+        }}
+      >
+        <div className="w-full flex flex-col gap-6">
+          <div className="flex gap-2.5 sm:gap-4">
+            <Image
+              width={59}
+              height={27}
+              alt={'icon'}
+              src={'/svgs/section-icon.svg'}
+              className="w-8 min-[400px]:w-12 sm:w-[59px]"
+            />
+            <p className="min-[400px]:text-lg sm:text-xl font-semibold">
+              Our Services
+            </p>
+          </div>
+
+          <div className="w-full mx-auto flex flex-col gap-12">
+            <div className="flex justify-between items-end flex-wrap gap-6">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl leading-snug font-semibold tracking-[-2%] max-w-[640px]">
+                We Provide the Workers You Need, and When You Need Them.
               </h3>
-              <p className="max-w-[390px]">
-                Stop waiting for opportunities. Get access to the best
-                construction and warehouse jobs immediately.
-              </p>
+
+              <button className="w-full sm:max-w-[207px] rounded-md bg-[#FAFAF7] text-[#010013] py-3 lg:py-4 px-5 lg:px-6 cursor-pointer text-sm sm:text-base lg:text-lg font-medium flex justify-center items-center gap-2.5">
+                Contact Us
+                <Image
+                  width={16}
+                  height={16}
+                  alt="arrow right"
+                  src="/svgs/arrow-right.svg"
+                />
+              </button>
             </div>
 
-            <button className="w-full sm:max-w-[207px] rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 lg:py-4 px-5 lg:px-6 cursor-pointer text-sm sm:text-base lg:text-lg font-medium">
-              Work With Us
-            </button>
-          </div>
+            <div
+              className="grid gap-5 sm:gap-6 grow"
+              style={{
+                gridTemplateColumns:
+                  'repeat(auto-fit, minmax(min(16em, 100%), 1fr))',
+              }}
+            >
+              {SERVICES.map((service, index) => (
+                <div
+                  key={index}
+                  className={`${
+                    index % 2
+                      ? 'bg-[#1462FF] flex-col-reverse'
+                      : 'bg-[#2B2868] flex-col'
+                  } rounded-2xl sm:rounded-[20px] text-[#FAFAF7] overflow-hidden py-6 px-5 flex gap-4`}
+                >
+                  <div
+                    className="relative w-full rounded-2xl overflow-hidden"
+                    style={{
+                      aspectRatio: 1.61 / 1,
+                    }}
+                  >
+                    <Image
+                      fill
+                      alt="image"
+                      src={service.image}
+                      className="w-full object-cover"
+                    />
+                  </div>
 
-          <div
-            className="grid gap-4 grow"
-            style={{
-              gridTemplateColumns:
-                'repeat(auto-fit, minmax(min(16em, 100%), 1fr))',
-            }}
-          >
-            {WORKERS_STEPS.map((step, index) => (
-              <div
-                key={index}
-                className="bg-[#FFFFFF] rounded-2xl text-[#131057] overflow-hidden"
-                style={{
-                  boxShadow: '0px 2px 16px 3px #0000000D',
-                }}
-              >
-                <div className="px-4 py-7 flex flex-col gap-2">
-                  <h3 className="text-lg font-semibold">
-                    {index + 1} {step.heading}
-                  </h3>
-                  <p>{step.content}</p>
-                </div>
+                  <div className="p-5 flex flex-col justify-between gap-4 border-[1px] border-[#FAFAF7] rounded-2xl grow">
+                    <div className="flex flex-col gap-2.5">
+                      <h3 className="text-lg sm:text-2xl font-semibold">
+                        {service.heading}
+                      </h3>
 
-                <div className="bg-[#131057] text-[#FAFAF7] flex justify-between items-center gap-5 py-2 px-4 font-medium">
-                  <p>Step</p>
-                  <p>0{index + 1}</p>
+                      <div className="w-full h-[0.5px] bg-[#CCCCD0]" />
+
+                      <p className="text-sm">{service.content}</p>
+                    </div>
+
+                    <button className="w-full sm:max-w-fit rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-4 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5 capitalize">
+                      {service?.cta?.split('-').join(' ')}
+                      <Image
+                        width={16}
+                        height={16}
+                        alt="arrow right"
+                        src="/svgs/arrow-right.svg"
+                      />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

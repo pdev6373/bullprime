@@ -129,7 +129,7 @@ export default function HowItWorks() {
             {WORKERS_STEPS.map((step, index) => (
               <div
                 key={index}
-                className="bg-[#FFFFFF] rounded-xl sm:rounded-2xl text-[#131057] overflow-hidden"
+                className="bg-[#FFFFFF] rounded-xl sm:rounded-2xl text-[#131057] overflow-hidden flex flex-col justify-between"
                 style={{
                   boxShadow: '0px 2px 16px 3px #0000000D',
                 }}
