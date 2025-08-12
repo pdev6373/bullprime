@@ -37,42 +37,47 @@ const WORKERS_STEPS = [
 export default function HowItWorks() {
   return (
     <section
-      className="bg-[#FEFEFF] py-24 text-[#010013] flex justify-center"
+      className="bg-[#FEFEFF] py-8 pb-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 text-[#010013] flex justify-center"
       style={{
         paddingInline: 'max(6.25vw, 20px)',
       }}
     >
-      <div className="w-full flex flex-col gap-28">
-        <div className="flex justify-between items-center flex-col min-[920px]:flex-row gap-10 w-full max-w-[1152px]">
-          <div className="flex flex-col gap-6 grow">
-            <div className="flex gap-4">
+      <div className="w-full flex flex-col gap-12 sm:gap-16 lg:gap-24 xl:gap-28">
+        <div className="flex justify-between items-center flex-col min-[1200px]:flex-row gap-8 sm:gap-10 w-full min-[1200px]:max-w-[1152px] mx-auto">
+          <div className="flex flex-col gap-6 grow w-full min-[1200px]:w-auto">
+            <div className="flex gap-2.5 sm:gap-4">
               <Image
                 width={59}
                 height={27}
                 alt={'icon'}
                 src={'/svgs/section-icon.svg'}
+                className="w-8 min-[400px]:w-12 sm:w-[59px]"
               />
-              <p className="text-xl font-semibold">How it Works</p>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <h3 className="text-3xl font-semibold tracking-[-2%] max-w-[427px]">
-                <span className="text-[#1462FF]">For Businesses:</span> Get
-                Workers Faster, Cheaper, Better
-              </h3>
-              <p className="max-w-[390px]">
-                Stop wasting time with traditional recruiting. Get skilled
-                workers placed in hours, not weeks
+              <p className="min-[400px]:text-lg sm:text-xl font-semibold">
+                How it Works
               </p>
             </div>
 
-            <button className="w-full sm:max-w-[207px] rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 lg:py-4 px-5 lg:px-6 cursor-pointer text-sm sm:text-base lg:text-lg font-medium">
-              Hire Now
-            </button>
+            <div className="flex gap-6 flex-wrap justify-between items-end min-[1200px]:items-start min-[1200px]:max-w-[427px]">
+              <div className="flex flex-col gap-2 grow">
+                <h3 className="text-2xl sm:text-3xl font-semibold tracking-[-2%] max-w-[427px]">
+                  <span className="text-[#1462FF]">For Businesses:</span> Get
+                  Workers Faster, Cheaper, Better
+                </h3>
+                <p className="text-sm sm:text-base max-w-[390px]">
+                  Stop wasting time with traditional recruiting. Get skilled
+                  workers placed in hours, not weeks
+                </p>
+              </div>
+
+              <button className="w-full sm:max-w-[207px] rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 lg:py-4 px-5 lg:px-6 cursor-pointer text-sm sm:text-base lg:text-lg font-medium">
+                Hire Now
+              </button>
+            </div>
           </div>
 
           <div
-            className="grid gap-4 grow"
+            className="grid gap-4 grow-10 w-full min-[1200px]:w-auto"
             style={{
               gridTemplateColumns:
                 'repeat(auto-fit, minmax(min(16em, 100%), 1fr))',
@@ -83,9 +88,9 @@ export default function HowItWorks() {
                 key={index}
                 className={`${
                   index && index < array.length - 1
-                    ? 'bg-[#D0E0FF]'
-                    : 'bg-[#E7EFFF]'
-                } p-6 rounded-2xl text-[#131057] flex flex-col gap-2`}
+                    ? 'bg-[#E7EFFF] sm:bg-[#D0E0FF]'
+                    : 'bg-[#E7EFFF] sm:bg-[#E7EFFF]'
+                } p-6 rounded-xl sm:rounded-2xl text-[#131057] flex flex-col gap-2`}
               >
                 <h3 className="text-lg font-semibold">
                   {index + 1} {step.heading}
@@ -97,13 +102,13 @@ export default function HowItWorks() {
         </div>
 
         <div className="w-full max-w-[815px] mx-auto flex flex-col gap-8">
-          <div className="flex justify-between items-end">
+          <div className="flex justify-between items-end flex-wrap gap-6">
             <div className="flex flex-col gap-2">
-              <h3 className="text-3xl font-semibold tracking-[-2%] max-w-[427px]">
+              <h3 className="text-2xl sm:text-3xl font-semibold tracking-[-2%] max-w-[427px]">
                 <span className="text-[#1462FF]">For Workers:</span> Better
                 Jobs, Higher Pay, Faster Placement
               </h3>
-              <p className="max-w-[390px]">
+              <p className="text-sm sm:text-base max-w-[390px]">
                 Stop waiting for opportunities. Get access to the best
                 construction and warehouse jobs immediately.
               </p>
@@ -124,12 +129,12 @@ export default function HowItWorks() {
             {WORKERS_STEPS.map((step, index) => (
               <div
                 key={index}
-                className="bg-[#FFFFFF] rounded-2xl text-[#131057] overflow-hidden"
+                className="bg-[#FFFFFF] rounded-xl sm:rounded-2xl text-[#131057] overflow-hidden"
                 style={{
                   boxShadow: '0px 2px 16px 3px #0000000D',
                 }}
               >
-                <div className="px-4 py-7 flex flex-col gap-2">
+                <div className="px-4 py-5 sm:py-6 lg:py-7 flex flex-col gap-2">
                   <h3 className="text-lg font-semibold">
                     {index + 1} {step.heading}
                   </h3>
