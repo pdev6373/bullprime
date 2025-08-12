@@ -78,7 +78,7 @@ export default function Footer() {
             className="relative"
             style={{
               aspectRatio: 4.23 / 1,
-              width: 'clamp(170px, 15.28vw, 220px)',
+              width: 'clamp(120px, 15.28vw, 220px)',
             }}
           >
             <Image src="/svgs/logo-white.svg" alt="logo" fill />
