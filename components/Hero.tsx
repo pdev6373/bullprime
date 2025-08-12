@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
-export default function CTA() {
+export default function Hero() {
   return (
     <section
-      className="bg-[#1462FF] py-12 sm:py-14 gap-10 flex justify-center"
+      className="bg-[#FEFEFF] py-12 sm:py-14 gap-10 flex justify-center"
       style={{
         paddingInline: 'max(6.25vw, 20px)',
       }}

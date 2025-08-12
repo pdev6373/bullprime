@@ -85,7 +85,7 @@ export default function OurServices() {
               className="grid gap-5 sm:gap-6 grow"
               style={{
                 gridTemplateColumns:
-                  'repeat(auto-fit, minmax(min(16em, 100%), 1fr))',
+                  'repeat(auto-fit, minmax(min(22em, 100%), 1fr))',
               }}
             >
               {SERVICES.map((service, index) => (
