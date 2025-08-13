@@ -75,7 +75,7 @@ export default function ContactUs() {
         paddingBlock: 'clamp(36px, 5.556vw, 80px)',
       }}
     >
-      <div className="flex flex-col items-center gap-6">
+      <div className="flex flex-col items-center gap-5 sm:gap-6">
         <div className="flex gap-2.5 sm:gap-4">
           <Image
             alt="icon"
