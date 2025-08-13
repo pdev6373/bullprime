@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Input from '@/components/Form/Input';
 
-export default function RequestSkilledWorkers() {
+export default function HireWorkers() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');

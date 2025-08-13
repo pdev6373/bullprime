@@ -1,22 +1,59 @@
 'use client';
+import L from 'leaflet';
 import Image from 'next/image';
-import { useState } from 'react';
+import 'leaflet/dist/leaflet.css';
+import { LatLngExpression } from 'leaflet';
+import { FormEvent, useState } from 'react';
 import Input from '@/components/Form/Input';
 import { CONTACT } from '@/components/Footer';
+import { Marker, Popup } from 'react-leaflet';
+import { TileLayer } from 'react-leaflet/TileLayer';
+import { MapContainer } from 'react-leaflet/MapContainer';
+
+export const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+});
+
+const POSITION: LatLngExpression = [53.771948, -1.722736];
 
 export default function ContactUs() {
-  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [industry, setIndustry] = useState('');
-  const [experience, setExperience] = useState('');
-  const [additionalInfo, setAdditionalInfo] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [isMessageSent, setIsMessageSent] = useState(false);
+
+  const isValid =
+    subject.trim() &&
+    message.trim() &&
+    lastName.trim() &&
+    firstName?.trim() &&
+    EMAIL_REGEX.test(email);
+
+  const contactHandler = async (e?: FormEvent) => {
+    e && e.preventDefault();
+
+    if (!isValid) return;
+
+    setIsMessageSent(true);
+  };
 
   return (
     <section
-      className="bg-[#F8F8FE] py-20 text-[#010013] flex flex-col gap-10 items-center"
+      className="bg-[#F8F8FE] text-[#010013] flex flex-col items-center"
       style={{
+        gap: 'clamp(32px, 3.8889vw, 56px)',
         paddingInline: 'max(6.25vw, 20px)',
+        paddingBlock: 'clamp(40px, 5.556vw, 80px)',
       }}
     >
       <div className="flex flex-col items-center gap-6">
@@ -26,34 +63,64 @@ export default function ContactUs() {
             width={59}
             height={27}
             src="/svgs/section-icon.svg"
-            className="w-8 min-[400px]:w-12 sm:w-[59px]"
+            style={{
+              width: 'clamp(30px, 3.33vw, 48px)',
+            }}
           />
-          <p className="min-[400px]:text-lg sm:text-xl font-semibold">
+          <p
+            className="min-[400px]:text-lg xl:text-xl font-semibold"
+            style={{
+              fontSize: 'clamp(16px, 1.389vw, 20px)',
+            }}
+          >
             Contact Us
           </p>
         </div>
 
-        <div className="flex flex-col gap-2 text-center">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl leading-snug font-semibold tracking-[-2%] max-w-[640px]">
+        <div className="flex flex-col items-center gap-2 text-center">
+          <h3
+            className="leading-snug font-semibold tracking-[-2%] max-w-[640px]"
+            style={{
+              fontSize: 'clamp(24px, 2.5vw, 36px)',
+            }}
+          >
             Get In Touch
           </h3>
-          <p className="max-w-[740px] text-sm sm:text-base lg:text-lg">
-            {`Whether you’re a business looking for skilled workers or a candidate
-            seeking your next opportunity, we’re here to help. Reach out to us
-            today and let’s start building your future.`}
+          <p
+            className="max-w-[740px]"
+            style={{
+              fontSize: 'clamp(14px, 1.25vw, 18px)',
+            }}
+          >
+            {`Whether you're a business looking for skilled workers or a candidate
+            seeking your next opportunity, we're here to help. Reach out to us
+            today and let's start building your future.`}
           </p>
         </div>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-10 w-full max-w-[1191px] mx-auto">
-        <div className="flex flex-col gap-7 flex-1 grow">
-          <div className="flex flex-col md:flex-row flex-wrap lg:flex-col gap-6 w-full justify-between">
+        <div className="flex flex-col gap-6 lg:gap-7 flex-1 grow">
+          <div className="flex flex-col md:flex-row flex-wrap lg:flex-col gap-4 lg:gap-5 w-full justify-between">
             {CONTACT.map((contact) => (
-              <div className="flex flex-col gap-2.5" key={contact.title}>
-                <h3 className="text-xl font-semibold">{contact.title}</h3>
+              <div className="flex flex-col gap-1.5" key={contact.title}>
+                <h3
+                  className="font-semibold"
+                  style={{
+                    fontSize: 'clamp(16px, 1.3889vw, 20px)',
+                  }}
+                >
+                  {contact.title}
+                </h3>
                 <div className="flex flex-col gap-1">
                   {contact.body.map((contact) => (
-                    <p className="max-w-[260px]" key={contact.content}>
+                    <p
+                      className="max-w-[260px]"
+                      key={contact.content}
+                      style={{
+                        fontSize: 'clamp(14px, 1.111vw, 16px)',
+                      }}
+                    >
                       {contact.content}
                     </p>
                   ))}
@@ -63,58 +130,94 @@ export default function ContactUs() {
           </div>
 
           <div
-            className="w-full grow rounded-2xl bg-[#DFDFDF]"
+            className="relative z-40 w-full grow rounded-2xl bg-[#DFDFDF] overflow-hidden"
             style={{
               aspectRatio: 1.207 / 1,
             }}
-          ></div>
+          >
+            <MapContainer
+              center={POSITION}
+              zoom={15}
+              scrollWheelZoom={false}
+              className="h-full w-full"
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Marker position={POSITION}>
+                <Popup>
+                  62 Tong Street, Suite 37
+                  <br />
+                  The Enterprise Hub
+                  <br />
+                  Bradford, BD4 9LX
+                </Popup>
+              </Marker>
+            </MapContainer>
+          </div>
         </div>
 
         <form
-          action=""
-          className="flex flex-col gap-7 lg:gap-8 bg-white p-8 rounded-lg flex-1 grow-[1.27]"
+          onSubmit={contactHandler}
+          className="flex flex-col gap-6 lg:gap-7 bg-white rounded-lg flex-1 grow-[1.2]"
+          style={{
+            padding: 'clamp(20px, 2.222vw, 32px)',
+          }}
         >
           <div className="flex flex-col gap-5 lg:gap-6">
             <Input
-              value={fullName}
+              value={firstName}
               className="grow"
-              label="Your Full Name*"
-              placeholder="Ex. John Doe"
-              onChange={(value) => setFullName(value)}
+              label="First Name*"
+              placeholder="Enter first name"
+              onChange={(value) => setFirstName(value)}
             />
             <Input
-              value={email}
+              value={lastName}
               className="grow"
-              label="Your Email Address*"
-              placeholder="example@gmail.com"
+              label="Last Name*"
+              placeholder="Enter last name"
+              onChange={(value) => setLastName(value)}
+            />
+            <Input
+              className="grow"
+              value={email}
+              label="Email Address*"
+              placeholder="Enter email address"
               onChange={(value) => setEmail(value)}
             />
             <Input
               className="grow"
-              value={experience}
-              label="Phone Number*"
-              placeholder="+1233456789"
-              onChange={(value) => setExperience(value)}
-            />
-            <Input
-              className="grow"
-              value={additionalInfo}
-              label="Primary Industry*"
-              placeholder="Select Industry"
-              onChange={(value) => setAdditionalInfo(value)}
+              value={subject}
+              label="Subject*"
+              placeholder="Enter subject"
+              onChange={(value) => setSubject(value)}
             />
             <Input
               type="textarea"
-              value={experience}
-              label="Specific Skills & Experience"
-              onChange={(value) => setExperience(value)}
-              placeholder="Describe your skills, certifications and experience"
+              value={message}
+              label="Your Message"
+              placeholder="Enter your message here"
+              onChange={(value) => setMessage(value)}
             />
           </div>
 
-          <button className="w-full rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium">
+          <button
+            className="w-full rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium disabled:cursor-not-allowed"
+            disabled={!isValid}
+          >
             Submit Form
           </button>
+
+          {isMessageSent && (
+            <div className="bg-[#E7F6EC] rounded-lg p-4 flex flex-col gap-1 text-[#0F973D] text-center">
+              <h3 className="text-lg font-medium tracking-[-2%]">
+                Thank you for reaching out.
+              </h3>
+              <p className="text-sm">Our team will get back to you shortly</p>
+            </div>
+          )}
         </form>
       </div>
     </section>

@@ -4,19 +4,19 @@ import Image from 'next/image';
 const QUICK_LINKS = [
   {
     title: 'About Us',
-    route: '#about-us',
+    route: '/about-us',
   },
   {
     title: 'Our Services',
-    route: '#our-services',
+    route: '/services',
   },
   {
     title: 'Hire Workers',
-    route: '#hire-workers',
+    route: '/hire-workers',
   },
   {
     title: 'Work With Us',
-    route: '#work-with-us',
+    route: '/work-with-us',
   },
 ];
 

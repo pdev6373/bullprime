@@ -19,7 +19,7 @@ const ROUTES = [
 export default function Header() {
   return (
     <header
-      className="z-30 flex justify-between items-center gap-10 py-4 sticky top-0 left-0 right-0 bg-[#FFFFFF] text-[#0E0E0E]"
+      className="z-50 flex justify-between items-center gap-10 py-4 sticky top-0 left-0 right-0 bg-[#FFFFFF] text-[#0E0E0E]"
       style={{
         paddingInline: 'max(6.25vw, 20px)',
         boxShadow: '0px 2px 16px 0px #0000000D',

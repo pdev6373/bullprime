@@ -20,16 +20,28 @@ export default function Input({
 }: Input) {
   return (
     <div
-      className={`${className} text-[#010013] font-semibold flex flex-col gap-2`}
+      className={`${className} text-[#010013] font-semibold flex flex-col gap-1.5`}
     >
-      {!!label && <p>{label}</p>}
+      {!!label && (
+        <p
+          style={{
+            fontSize: 'clamp(14px, 1.111vw, 16px)',
+          }}
+        >
+          {label}
+        </p>
+      )}
 
       {type === 'textarea' ? (
         <textarea
           value={value}
           placeholder={placeholder}
           onChange={(e) => onChange(e.target.value)}
-          className="border-[1.5px] border-[#CCCCD0] rounded-lg placeholder:text-[#B3B2B8] p-4 font-normal min-h-[155px]"
+          className="border-[1.5px] border-[#CCCCD0] rounded-lg placeholder:text-[#B3B2B8] font-normal min-h-[155px]"
+          style={{
+            padding: 'clamp(12px, 1.111vw, 16px)',
+            fontSize: 'clamp(14px, 1.111vw, 16px)',
+          }}
         />
       ) : (
         <input
@@ -37,7 +49,11 @@ export default function Input({
           value={value}
           placeholder={placeholder}
           onChange={(e) => onChange(e.target.value)}
-          className="border-[1.5px] border-[#CCCCD0] rounded-lg placeholder:text-[#B3B2B8] p-4 font-normal"
+          className="border-[1.5px] border-[#CCCCD0] rounded-lg placeholder:text-[#B3B2B8 font-normal"
+          style={{
+            padding: 'clamp(12px, 1.111vw, 16px)',
+            fontSize: 'clamp(14px, 1.111vw, 16px)',
+          }}
         />
       )}
     </div>
