@@ -53,7 +53,7 @@ export default function ContactUs() {
       style={{
         gap: 'clamp(32px, 3.8889vw, 56px)',
         paddingInline: 'max(6.25vw, 20px)',
-        paddingBlock: 'clamp(40px, 5.556vw, 80px)',
+        paddingBlock: 'clamp(36px, 5.556vw, 80px)',
       }}
     >
       <div className="flex flex-col items-center gap-6">
@@ -87,7 +87,7 @@ export default function ContactUs() {
             Get In Touch
           </h3>
           <p
-            className="max-w-[740px]"
+            className="md:max-w-[51.389vw]"
             style={{
               fontSize: 'clamp(14px, 1.25vw, 18px)',
             }}
@@ -99,7 +99,7 @@ export default function ContactUs() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-10 w-full max-w-[1191px] mx-auto">
+      <div className="flex flex-col-reverse lg:flex-row gap-10 w-full max-w-[1191px] mx-auto">
         <div className="flex flex-col gap-6 lg:gap-7 flex-1 grow">
           <div className="flex flex-col md:flex-row flex-wrap lg:flex-col gap-4 lg:gap-5 w-full justify-between">
             {CONTACT.map((contact) => (
