@@ -3,25 +3,14 @@ import L from 'leaflet';
 import Image from 'next/image';
 import 'leaflet/dist/leaflet.css';
 import { LatLngExpression } from 'leaflet';
-import { FormEvent, useState } from 'react';
 import Input from '@/components/Form/Input';
 import { CONTACT } from '@/components/Footer';
 import { Marker, Popup } from 'react-leaflet';
 import { TileLayer } from 'react-leaflet/TileLayer';
+import { FormEvent, useEffect, useState } from 'react';
 import { MapContainer } from 'react-leaflet/MapContainer';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-
-delete (L.Icon.Default.prototype as { _getIconUrl?: () => string })._getIconUrl;
-
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl:
-    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-});
 
 const POSITION: LatLngExpression = [53.771948, -1.722736];
 
@@ -32,6 +21,20 @@ export default function ContactUs() {
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [isMessageSent, setIsMessageSent] = useState(false);
+
+  useEffect(() => {
+    delete (L.Icon.Default.prototype as { _getIconUrl?: () => string })
+      ._getIconUrl;
+
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+      iconUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+      shadowUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+    });
+  }, []);
 
   const isValid =
     subject.trim() &&
