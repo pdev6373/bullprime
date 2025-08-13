@@ -10,7 +10,7 @@ import { Marker, Popup } from 'react-leaflet';
 import { TileLayer } from 'react-leaflet/TileLayer';
 import { MapContainer } from 'react-leaflet/MapContainer';
 
-export const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 delete (L.Icon.Default.prototype as { _getIconUrl?: () => string })._getIconUrl;
 
@@ -41,7 +41,7 @@ export default function ContactUs() {
     EMAIL_REGEX.test(email);
 
   const contactHandler = async (e?: FormEvent) => {
-    e && e.preventDefault();
+    if (e) e.preventDefault();
 
     if (!isValid) return;
 
