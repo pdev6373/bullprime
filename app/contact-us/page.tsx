@@ -1,14 +1,27 @@
 'use client';
-import L from 'leaflet';
 import Image from 'next/image';
 import 'leaflet/dist/leaflet.css';
+import dynamic from 'next/dynamic';
 import { LatLngExpression } from 'leaflet';
 import Input from '@/components/Form/Input';
 import { CONTACT } from '@/components/Footer';
-import { Marker, Popup } from 'react-leaflet';
-import { TileLayer } from 'react-leaflet/TileLayer';
-import { FormEvent, useEffect, useState } from 'react';
-import { MapContainer } from 'react-leaflet/MapContainer';
+import { useState, useEffect, FormEvent } from 'react';
+
+const MapContainer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.MapContainer),
+  { ssr: false },
+);
+const TileLayer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.TileLayer),
+  { ssr: false },
+);
+const Marker = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Marker),
+  { ssr: false },
+);
+const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), {
+  ssr: false,
+});
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -23,16 +36,18 @@ export default function ContactUs() {
   const [isMessageSent, setIsMessageSent] = useState(false);
 
   useEffect(() => {
-    delete (L.Icon.Default.prototype as { _getIconUrl?: () => string })
-      ._getIconUrl;
+    import('leaflet').then((L) => {
+      delete (L.Icon.Default.prototype as { _getIconUrl?: () => string })
+        ._getIconUrl;
 
-    L.Icon.Default.mergeOptions({
-      iconRetinaUrl:
-        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-      iconUrl:
-        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-      shadowUrl:
-        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl:
+          'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+        iconUrl:
+          'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+        shadowUrl:
+          'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      });
     });
   }, []);
 
