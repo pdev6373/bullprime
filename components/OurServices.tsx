@@ -26,7 +26,10 @@ const SERVICES = [
 
 export default function OurServices() {
   return (
-    <div className="relative bg-[#131057] py-8 pb-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 text-[#FAFAF7]">
+    <div
+      className="relative bg-[#131057] py-8 pb-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 text-[#FAFAF7]"
+      id="our-services"
+    >
       <div className="absolute top-0 left-0 right-0 z-10">
         <Image
           alt="cta"

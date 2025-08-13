@@ -29,7 +29,7 @@ export default function Header() {
         className="relative"
         style={{
           aspectRatio: 4.19 / 1,
-          width: 'clamp(120px, 10.486vw, 151px)',
+          width: 'clamp(100px, 10.486vw, 151px)',
         }}
       >
         <Image src="/svgs/logo-black.svg" alt="logo" fill />
