@@ -20,7 +20,7 @@ const QUICK_LINKS = [
   },
 ];
 
-const CONTACT = [
+export const CONTACT = [
   {
     title: 'We are open',
     body: [

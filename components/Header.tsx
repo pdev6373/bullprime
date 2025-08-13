@@ -1,18 +1,18 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ROUTES = [
   {
     title: 'home',
-    route: '#',
+    route: '/',
   },
   {
     title: 'about us',
-    route: '#about-us',
+    route: '/about-us',
   },
   {
     title: 'services',
-    route: '#services',
+    route: '/services',
   },
 ];
 
@@ -47,9 +47,12 @@ export default function Header() {
         ))}
       </nav>
 
-      <button className="w-full sm:w-fit rounded-md bg-transparent py-3 px-5 lg:px-6 cursor-pointer text-[#1462FF] text-sm font-medium outline-[1px] outline-[#1462FF] hidden md:flex">
+      <Link
+        href="/contact-us"
+        className="w-full sm:w-fit rounded-md bg-transparent py-3 px-5 lg:px-6 cursor-pointer text-[#1462FF] text-sm font-medium outline-[1px] outline-[#1462FF] hidden md:flex"
+      >
         Contact Us
-      </button>
+      </Link>
     </header>
   );
 }

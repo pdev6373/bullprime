@@ -2,21 +2,21 @@ import Image from 'next/image';
 
 const SERVICES = [
   {
-    image: '/pngs/service.png',
+    image: '/pngs/service-one.png',
     heading: 'Construction Staffing',
     content:
       'Building the right team for your projects. We supply skilled and semi-skilled workers for construction sites, ranging from general labourers to qualified tradespeople. Our candidates undergo thorough vetting to ensure they have the expertise and safety awareness required for demanding construction environments.',
     cta: 'hire-now',
   },
   {
-    image: '/pngs/service.png',
+    image: '/pngs/service-two.png',
     heading: 'Warehousing Staff',
     content:
       'Reliable staffing for smooth supply chain operations. Our warehousing recruitment solutions ensure your logistics operations never face staff shortages. We supply trained personnel who can seamlessly integrate into your existing processes, improving efficiency and productivity',
     cta: 'learn-more',
   },
   {
-    image: '/pngs/service.png',
+    image: '/pngs/service-three.png',
     heading: 'Training & Compliance',
     content:
       'Empowering workers with skills and certifications. We believe a prepared workforce is a successful workforce. That’s why we offer training and compliance support to ensure candidates meet industry standards before stepping on site. This not only benefits businesses but also boosts workers’ confidence and career growth.',
@@ -59,7 +59,7 @@ export default function OurServices() {
               width={59}
               height={27}
               alt={'icon'}
-              src={'/svgs/section-icon.svg'}
+              src={'/svgs/section-icon-white.svg'}
               className="w-8 min-[400px]:w-12 sm:w-[59px]"
             />
             <p className="min-[400px]:text-lg sm:text-xl font-semibold">
