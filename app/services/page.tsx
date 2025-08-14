@@ -1,6 +1,6 @@
 'use client';
-import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
+import { motion, Variants } from 'framer-motion';
 
 const itemVariants: Variants = {
   hidden: { y: 30, opacity: 0 },
@@ -77,11 +77,56 @@ const SERVICES = [
 export default function Services() {
   return (
     <div>
-      <div className="bg-[url('/pngs/service-hero.png')] bg-cover bg-center aspect-[1.2/1] lg:aspect-[1.83/1]">
-        <div className="flex items-end h-full">
-          <h1 className="text-white text-5xl font-bold">
-            Welcome to Our Website
-          </h1>
+      <div className="bg-[url('/pngs/service-hero.png')] bg-cover bg-center aspect-[1.5/1] md:aspect-[1.85/1]">
+        <div
+          className="flex flex-col justify-end h-full gap-1.5 sm:gap-2"
+          style={{
+            paddingInline: 'clamp(20px, 6.25vw, 90px)',
+            paddingBlock: 'clamp(24px, 9.51vw, 137px)',
+          }}
+        >
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center gap-2.5 sm:gap-4"
+          >
+            <motion.div
+              className="flex items-center"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <Image
+                alt="icon"
+                width={59}
+                height={27}
+                src="/svgs/section-icon.svg"
+                style={{
+                  width: 'clamp(24px, 3.33vw, 48px)',
+                }}
+              />
+            </motion.div>
+            <p
+              className="min-[400px]:text-lg xl:text-xl font-semibold"
+              style={{
+                fontSize: 'clamp(16px, 1.389vw, 20px)',
+              }}
+            >
+              Our Services
+            </p>
+          </motion.div>
+
+          <div className="flex flex-col gap-2">
+            <h3
+              className="font-semibold tracking-[-2%]"
+              style={{
+                fontSize: 'clamp(20px, 3.33vw, 48px)',
+              }}
+            >
+              Our Workforce Solutions
+            </h3>
+            <p className="w-full md:max-w-[80vw] lg:max-w-[60vw] xl:max-w-[45.04vw] text-[10px] leading-[1.7] min-[405]:text-xs sm:text-sm lg:text-base">
+              {`At Bull Prime Services Ltd, we understand that the right people can make all the difference in a business’s success. That’s why we provide tailored recruitment solutions for the construction and warehousing sectors – ensuring you get skilled, reliable, and fully compliant workers when you need them most.`}
+            </p>
+          </div>
         </div>
       </div>
 
