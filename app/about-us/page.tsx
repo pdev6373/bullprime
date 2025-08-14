@@ -98,7 +98,7 @@ export default function AboutUs() {
               <div
                 className="flex flex-col gap-6"
                 style={{
-                  fontSize: 'clamp(14px, 1.389vw, 20px)',
+                  fontSize: 'clamp(16px, 1.389vw, 20px)',
                 }}
               >
                 <p>{about.body}</p>
