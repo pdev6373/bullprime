@@ -136,7 +136,6 @@ export default function ContactUs() {
     <div
       className="bg-[#F8F8FE] text-[#010013]"
       style={{
-        gap: 'clamp(32px, 3.8889vw, 56px)',
         paddingInline: 'max(6.25vw, 20px)',
         paddingBlock: 'clamp(36px, 5.556vw, 80px)',
       }}
@@ -147,6 +146,9 @@ export default function ContactUs() {
         variants={containerVariants}
         className="flex flex-col items-center"
         viewport={{ once: true, margin: '-100px' }}
+        style={{
+          gap: 'clamp(32px, 3.8889vw, 56px)',
+        }}
       >
         <motion.div
           variants={itemVariants}
@@ -215,7 +217,7 @@ export default function ContactUs() {
               variants={containerVariants}
               className="flex flex-col md:flex-row flex-wrap lg:flex-col gap-4 lg:gap-5 w-full justify-between"
             >
-              {CONTACT.map((contact, index) => (
+              {CONTACT.map((contact) => (
                 <motion.div
                   key={contact.title}
                   variants={itemVariants}
