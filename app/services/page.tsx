@@ -3,6 +3,15 @@ import Image from 'next/image';
 import { motion, Variants, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
+type Service = {
+  image: string;
+  heading: string;
+  content: string;
+  cta: string;
+  offers: string[];
+  reasons: string[];
+};
+
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -85,7 +94,7 @@ const listItemVariants: Variants = {
   },
 };
 
-const SERVICES = [
+const SERVICES: Service[] = [
   {
     image: '/pngs/service-one.png',
     heading: 'Construction Staffing',
@@ -283,7 +292,7 @@ export default function Services() {
   );
 }
 
-function ServiceCard({ service, index }: { service: any; index: number }) {
+function ServiceCard({ service, index }: { service: Service; index: number }) {
   const { ref, isInView } = useAnimateOnView();
 
   const cardVariants: Variants = {
