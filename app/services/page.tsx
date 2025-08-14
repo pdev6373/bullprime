@@ -118,6 +118,7 @@ export default function Services() {
         >
           {SERVICES.map((service, index) => (
             <div
+              key={index}
               className={`${
                 index % 2 ? 'bg-[#131057] text-[#E6E5E7]' : 'bg-[#F8F8FE]'
               } rounded-2xl lg:rounded-3xl flex flex-col w-full`}
@@ -231,6 +232,7 @@ export default function Services() {
                   <ul>
                     {service.offers.map((offer) => (
                       <li
+                        key={offer}
                         className="list-disc ml-5 text-[#343342] tracking-[-2%] marker:text-[#343342] marker:text-xs"
                         style={{
                           fontSize: 'clamp(14px, 1.25vw, 18px)',
@@ -255,6 +257,7 @@ export default function Services() {
                   <ul>
                     {service.reasons.map((reason) => (
                       <li
+                        key={reason}
                         className="list-disc ml-5 text-[#343342] tracking-[-2%] marker:text-[#343342] marker:text-xs"
                         style={{
                           fontSize: 'clamp(14px, 1.25vw, 18px)',
