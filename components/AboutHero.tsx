@@ -135,9 +135,16 @@ export default function AboutHero() {
 
           <motion.p
             variants={fadeInUp}
-            className="w-full md:max-w-[80vw] lg:max-w-[60vw] xl:max-w-[45.04vw] leading-[1.7] text-xs sm:text-sm lg:text-base"
+            className="w-full md:max-w-[80vw] lg:max-w-[60vw] xl:max-w-[45.04vw] leading-[1.7] text-xs sm:text-sm lg:text-base hidden min-[400px]:block"
           >
             {`At Bull Prime Services Ltd, we specialise in connecting skilled workers with leading businesses in the construction and warehousing sectors.`}
+          </motion.p>
+
+          <motion.p
+            variants={fadeInUp}
+            className="w-full md:max-w-[80vw] lg:max-w-[60vw] xl:max-w-[45.04vw] leading-[1.7] text-xs sm:text-sm lg:text-base min-[400px]:hidden"
+          >
+            {`We specialise in connecting skilled workers with leading businesses in the construction and warehousing sectors.`}
           </motion.p>
         </motion.div>
       </div>
@@ -149,7 +156,7 @@ export default function AboutHero() {
         src="/svgs/rotate.svg"
         className="absolute left-[50%] bottom-0 translate-y-[50%] translate-x-[-50%] aspect-square"
         style={{
-          width: 'clamp(65px, 10.138vw, 146px)',
+          width: 'clamp(70px, 10.138vw, 146px)',
         }}
         animate={{
           rotate: 360,
