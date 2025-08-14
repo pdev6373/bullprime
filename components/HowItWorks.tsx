@@ -1,4 +1,30 @@
+'use client';
 import Image from 'next/image';
+import { motion, Variants } from 'framer-motion';
+
+const itemVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const slideInRight: Variants = {
+  hidden: { x: 30, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 1,
+      ease: 'easeOut',
+    },
+  },
+};
 
 const BUSINESS_STEPS = [
   {
@@ -37,30 +63,55 @@ const WORKERS_STEPS = [
 export default function HowItWorks() {
   return (
     <section
-      className="bg-[#FEFEFF] py-8 pb-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 text-[#010013] flex justify-center"
+      className="bg-[#FEFEFF] text-[#010013] flex justify-center"
       style={{
         paddingInline: 'max(6.25vw, 20px)',
+        paddingBlock: 'clamp(40px, 6.6667vw, 96px)',
       }}
     >
       <div className="w-full flex flex-col gap-12 sm:gap-16 lg:gap-24 xl:gap-28">
         <div className="flex justify-between items-center flex-col min-[1200px]:flex-row gap-8 sm:gap-10 w-full min-[1200px]:max-w-[1152px] mx-auto">
           <div className="flex flex-col gap-6 grow w-full min-[1200px]:w-auto">
-            <div className="flex gap-2.5 sm:gap-4">
-              <Image
-                width={59}
-                height={27}
-                alt={'icon'}
-                src={'/svgs/section-icon.svg'}
-                className="w-8 min-[400px]:w-12 sm:w-[59px]"
-              />
-              <p className="min-[400px]:text-lg sm:text-xl font-semibold">
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center gap-2.5 sm:gap-4"
+            >
+              <motion.div
+                className="flex items-center"
+                whileHover={{
+                  scale: 1.1,
+                  transition: { duration: 0.2 },
+                }}
+              >
+                <Image
+                  alt="icon"
+                  width={59}
+                  height={27}
+                  src="/svgs/section-icon.svg"
+                  style={{
+                    width: 'clamp(24px, 3.33vw, 48px)',
+                  }}
+                />
+              </motion.div>
+              <motion.p
+                variants={slideInRight}
+                className="min-[400px]:text-lg xl:text-xl font-semibold"
+                style={{
+                  fontSize: 'clamp(16px, 1.389vw, 20px)',
+                }}
+              >
                 How it Works
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
             <div className="flex gap-6 flex-wrap justify-between items-end min-[1200px]:items-start min-[1200px]:max-w-[427px]">
               <div className="flex flex-col gap-2 grow">
-                <h3 className="text-2xl sm:text-3xl font-semibold tracking-[-2%] max-w-[427px]">
+                <h3
+                  className="font-semibold tracking-[-2%] max-w-[427px] leading-[1.4]"
+                  style={{
+                    fontSize: 'clamp(24px, 2.222vw, 32px)',
+                  }}
+                >
                   <span className="text-[#1462FF]">For Businesses:</span> Get
                   Workers Faster, Cheaper, Better
                 </h3>
@@ -70,14 +121,14 @@ export default function HowItWorks() {
                 </p>
               </div>
 
-              <button className="w-full sm:max-w-[207px] rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 lg:py-4 px-5 lg:px-6 cursor-pointer text-sm sm:text-base lg:text-lg font-medium">
+              <button className="w-full sm:w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-10 cursor-pointer text-sm outline-[1px] outline-[#1462FF]">
                 Hire Now
               </button>
             </div>
           </div>
 
           <div
-            className="grid gap-4 grow-10 w-full min-[1200px]:w-auto"
+            className="grid gap-3.5 xl:gap-4 grow-10 w-full min-[1200px]:w-auto"
             style={{
               gridTemplateColumns:
                 'repeat(auto-fit, minmax(min(16em, 100%), 1fr))',
@@ -90,12 +141,26 @@ export default function HowItWorks() {
                   index && index < array.length - 1
                     ? 'bg-[#E7EFFF] sm:bg-[#D0E0FF]'
                     : 'bg-[#E7EFFF] sm:bg-[#E7EFFF]'
-                } p-6 rounded-xl sm:rounded-2xl text-[#131057] flex flex-col gap-2`}
+                }rounded-xl sm:rounded-2xl text-[#131057] flex flex-col md:gap-1.5`}
+                style={{
+                  padding: 'clamp(20px, 1.6667vw, 24px)',
+                }}
               >
-                <h3 className="text-lg font-semibold">
+                <h3
+                  className="font-semibold"
+                  style={{
+                    fontSize: 'clamp(16px, 1.25vw, 18px)',
+                  }}
+                >
                   {index + 1} {step.heading}
                 </h3>
-                <p>{step.content}</p>
+                <p
+                  style={{
+                    fontSize: 'clamp(14px, 1.111vw, 16px)',
+                  }}
+                >
+                  {step.content}
+                </p>
               </div>
             ))}
           </div>
@@ -104,7 +169,12 @@ export default function HowItWorks() {
         <div className="w-full max-w-[815px] mx-auto flex flex-col gap-8">
           <div className="flex justify-between items-end flex-wrap gap-6">
             <div className="flex flex-col gap-2">
-              <h3 className="text-2xl sm:text-3xl font-semibold tracking-[-2%] max-w-[427px]">
+              <h3
+                className="font-semibold tracking-[-2%] max-w-[427px] leading-[1.4]"
+                style={{
+                  fontSize: 'clamp(24px, 2.222vw, 32px)',
+                }}
+              >
                 <span className="text-[#1462FF]">For Workers:</span> Better
                 Jobs, Higher Pay, Faster Placement
               </h3>
@@ -114,7 +184,7 @@ export default function HowItWorks() {
               </p>
             </div>
 
-            <button className="w-full sm:max-w-[207px] rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 lg:py-4 px-5 lg:px-6 cursor-pointer text-sm sm:text-base lg:text-lg font-medium">
+            <button className="w-full sm:w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-10 cursor-pointer text-sm outline-[1px] outline-[#1462FF]">
               Work With Us
             </button>
           </div>
@@ -134,14 +204,35 @@ export default function HowItWorks() {
                   boxShadow: '0px 2px 16px 3px #0000000D',
                 }}
               >
-                <div className="px-4 py-5 sm:py-6 lg:py-7 flex flex-col gap-2">
-                  <h3 className="text-lg font-semibold">
+                <div
+                  className="flex flex-col gap-1.5"
+                  style={{
+                    padding: 'clamp(20px, 1.6667vw, 24px)',
+                  }}
+                >
+                  <h3
+                    className="font-semibold"
+                    style={{
+                      fontSize: 'clamp(16px, 1.25vw, 18px)',
+                    }}
+                  >
                     {index + 1} {step.heading}
                   </h3>
-                  <p>{step.content}</p>
+                  <p
+                    style={{
+                      fontSize: 'clamp(14px, 1.111vw, 16px)',
+                    }}
+                  >
+                    {step.content}
+                  </p>
                 </div>
 
-                <div className="bg-[#131057] text-[#FAFAF7] flex justify-between items-center gap-5 py-2 px-4 font-medium">
+                <div
+                  className="bg-[#131057] text-[#FAFAF7] flex justify-between items-center gap-5 py-2 px-4 font-medium"
+                  style={{
+                    fontSize: 'clamp(14px, 1.111vw, 16px)',
+                  }}
+                >
                   <p>Step</p>
                   <p>0{index + 1}</p>
                 </div>
