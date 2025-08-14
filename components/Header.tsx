@@ -166,15 +166,15 @@ export default function Header() {
                       <Link
                         href={route.route}
                         onClick={handleLinkClick}
-                        className={`capitalize text-black font-medium py-2 block rounded-lg px-2 hover:bg-gray-100 transition-colors duration-200 overflow-hidden
+                        className={`capitalize text-black font-medium py-2 block rounded-lg hover:bg-gray-100 transition-colors duration-200 overflow-hidden
                         ${
                           route.route == '/'
                             ? pathname == '/' && route.route == '/'
-                              ? 'bg-gray-100'
+                              ? 'bg-gray-100 px-4'
                               : ''
                             : (pathname == '/' && route.route == '/') ||
                               pathname.includes(route.route)
-                            ? 'bg-gray-100'
+                            ? 'bg-gray-100 px-4'
                             : ''
                         }
                       `}
