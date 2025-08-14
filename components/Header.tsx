@@ -182,15 +182,7 @@ export default function Header() {
                   ))}
                 </nav>
 
-                <motion.div
-                  // whileTap={{
-                  //   scale: 0.98,
-                  //   color: '#FFFFFF',
-                  //   backgroundColor: '#1462FF',
-                  // }}
-                  // whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                >
+                <motion.div transition={{ duration: 0.2 }}>
                   <Link
                     href="/contact-us"
                     onClick={handleLinkClick}
