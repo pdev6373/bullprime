@@ -102,7 +102,7 @@ export default function Header() {
             className="fixed inset-0 z-[60] bg-white md:hidden"
           >
             <motion.div
-              className="flex flex-col h-full"
+              className="flex flex-col h-screen overflow-hidden"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%', opacity: 0 }}
@@ -148,7 +148,7 @@ export default function Header() {
                   boxShadow: '0px 2px 16px 0px #0000000D',
                 }}
               >
-                <nav className="flex flex-col gap-3">
+                <nav className="flex flex-col gap-3 grow">
                   {ROUTES.map((route) => (
                     <motion.div
                       key={route.title}
