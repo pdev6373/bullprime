@@ -87,7 +87,7 @@ export default function Services() {
         >
           <motion.div
             variants={itemVariants}
-            className="flex items-center gap-2.5 sm:gap-4"
+            className="items-center gap-2.5 sm:gap-4 hidden min-[405]:flex"
           >
             <motion.div
               className="flex items-center"
