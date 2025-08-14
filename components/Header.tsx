@@ -157,21 +157,21 @@ export default function Header() {
                       className="rounded-lg overflow-hidden"
                       whileTap={{
                         scale: 0.98,
-                        backgroundColor: 'bg-blue-50',
+                        backgroundColor: 'oklch(88.2% 0.059 254.128)',
                       }}
                     >
                       <Link
                         href={route.route}
                         onClick={handleLinkClick}
-                        className={`capitalize text-black font-medium py-2 block rounded-lg hover:bg-blue-50 transition-all duration-200 overflow-hidden
+                        className={`capitalize text-black font-medium py-2 block rounded-lg hover:bg-blue-200 transition-all duration-200 overflow-hidden
                         ${
                           route.route == '/'
                             ? pathname == '/' && route.route == '/'
-                              ? 'bg-blue-50 px-4'
+                              ? 'bg-blue-200 px-4'
                               : ''
                             : (pathname == '/' && route.route == '/') ||
                               pathname.includes(route.route)
-                            ? 'bg-blue-50 px-4'
+                            ? 'bg-blue-200 px-4'
                             : ''
                         }
                       `}
