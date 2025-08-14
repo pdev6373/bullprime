@@ -98,10 +98,17 @@ export default function ContactUs() {
   const [firstName, setFirstName] = useState('');
   const [isMessageSent, setIsMessageSent] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  //   document.documentElement.scrollTop = 0;
+
+  //   const timeout = setTimeout(() => {
+  //     window.scrollTo(0, 0);
+  //     document.documentElement.scrollTop = 0;
+  //   }, 3000);
+
+  //   return () => clearTimeout(timeout);
+  // }, []);
 
   useEffect(() => {
     import('leaflet').then((L) => {
@@ -138,7 +145,7 @@ export default function ContactUs() {
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-100px' }}
+      // viewport={{ once: true, margin: '-100px' }}
       variants={containerVariants}
       className="bg-[#F8F8FE] text-[#010013] flex flex-col items-center"
       style={{
