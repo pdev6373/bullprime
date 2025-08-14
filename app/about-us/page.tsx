@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { motion, Variants, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import CTA from '@/components/CTA';
+import CoreValues from '@/components/CoreValues';
 
 type Service = {
   image: string;
@@ -291,18 +292,8 @@ export default function AboutUs() {
             {`At Bull Prime Services Ltd, we provide tailored recruitment solutions for the construction and warehousing sectors — connecting you with skilled, reliable, and compliant workers when you need them, with plans to expand into more industries soon.`}
           </motion.p>
         </motion.div>
-
-        <div
-          className="flex flex-col w-full lg:max-w-[1185px] mx-auto"
-          style={{
-            gap: 'clamp(36px, 5vw, 72px)',
-          }}
-        >
-          {SERVICES.map((service, index) => (
-            <ServiceCard key={index} service={service} index={index} />
-          ))}
-        </div>
       </section>
+      <CoreValues />
       <CTA />
     </div>
   );
