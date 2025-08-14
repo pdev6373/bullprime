@@ -181,15 +181,13 @@ export default function Header() {
                   ))}
                 </nav>
 
-                <motion.div transition={{ duration: 0.2 }}>
-                  <Link
-                    href="/contact-us"
-                    onClick={handleLinkClick}
-                    className="w-full rounded-md bg-transparent p-3 cursor-pointer text-[#1462FF] font-medium outline-[1px] outline-[#1462FF] text-center block hover:bg-[#1462FF] hover:text-white transition-colors duration-300 active:bg-[#1462FF] active:text-white"
-                  >
-                    Contact Us
-                  </Link>
-                </motion.div>
+                <Link
+                  href="/contact-us"
+                  onClick={handleLinkClick}
+                  className="w-full rounded-md bg-transparent p-3 cursor-pointer text-[#1462FF] font-medium outline-[1px] outline-[#1462FF] text-center block hover:bg-[#1462FF] hover:text-white transition-colors duration-300 active:bg-[#1462FF] active:text-white"
+                >
+                  Contact Us
+                </Link>
               </div>
             </motion.div>
           </motion.div>
