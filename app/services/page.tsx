@@ -218,7 +218,7 @@ export default function Services() {
           >
             <motion.h3
               variants={slideInLeft}
-              className="font-semibold tracking-[-2%]"
+              className="font-semibold tracking-[-2%] leading-[1.3]"
               style={{
                 fontSize: 'clamp(20px, 3.33vw, 48px)',
               }}
