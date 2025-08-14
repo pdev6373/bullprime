@@ -26,6 +26,53 @@ const slideInRight: Variants = {
   },
 };
 
+const slideInLeft: Variants = {
+  hidden: { x: -30, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const scaleIn: Variants = {
+  hidden: { scale: 0.9, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const principleVariants: Variants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
 const PRINCIPLES = [
   {
     heading: 'Professionalism',
@@ -50,15 +97,24 @@ const PRINCIPLES = [
 
 export default function CoreValues() {
   return (
-    <div
+    <motion.div
       id="our-services"
       className="relative bg-[#131057] py-8 pb-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 text-[#FAFAF7] flex justify-center"
       style={{
         paddingInline: 'clamp(20px, 6.25vw, 90px)',
       }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
     >
       <div className="w-full max-w-[1158px]">
-        <div className="absolute top-0 left-0 right-0 z-10">
+        <motion.div
+          className="absolute top-0 left-0 right-0 z-10"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
           <Image
             alt="cta"
             width={1440}
@@ -73,7 +129,7 @@ export default function CoreValues() {
             src="/svgs/line-two.svg"
             className="w-full"
           />
-        </div>
+        </motion.div>
 
         <section className="flex justify-center w-full">
           <div className="w-full flex flex-col gap-5">
@@ -81,7 +137,7 @@ export default function CoreValues() {
               variants={itemVariants}
               className="items-center gap-2.5 sm:gap-4 hidden min-[405px]:flex"
             >
-              <motion.div className="flex items-center">
+              <motion.div className="flex items-center" variants={scaleIn}>
                 <Image
                   alt="icon"
                   width={59}
@@ -109,21 +165,27 @@ export default function CoreValues() {
                 gap: 'clamp(28px, 3.33vw, 48px)',
               }}
             >
-              <h3
+              <motion.h3
                 className="leading-snug font-semibold tracking-[-2%] max-w-[820px]"
                 style={{
                   fontSize: 'clamp(20px, 2.7778vw, 40px)',
                 }}
+                variants={slideInLeft}
               >
                 The principles that guide everything we do and shape our
                 commitment to excellence.
-              </h3>
+              </motion.h3>
 
               <div className="flex flex-col md:flex-row gap-6 sm:gap-7 grow">
-                <div
+                <motion.div
                   className="relative w-full rounded-2xl overflow-hidden flex-1 grow md:max-w-[432px]"
                   style={{
                     aspectRatio: 1 / 1.12,
+                  }}
+                  variants={scaleIn}
+                  whileHover={{
+                    scale: 1.02,
+                    transition: { duration: 0.3 },
                   }}
                 >
                   <Image
@@ -132,36 +194,57 @@ export default function CoreValues() {
                     src={'/pngs/principle.png'}
                     className="w-full object-cover"
                   />
-                </div>
+                </motion.div>
 
-                <div className="flex flex-col gap-5 justify-between flex-1 grow">
+                <motion.div
+                  className="flex flex-col gap-5 justify-between flex-1 grow"
+                  variants={staggerContainer}
+                >
                   {PRINCIPLES.map((principle, index) => (
-                    <div key={index} className="flex flex-col gap-2">
-                      <h3
+                    <motion.div
+                      key={index}
+                      className="flex flex-col gap-2"
+                      variants={principleVariants}
+                      whileHover={{
+                        x: 5,
+                        transition: { duration: 0.2 },
+                      }}
+                    >
+                      <motion.h3
                         className="font-semibold"
                         style={{
                           fontSize: 'clamp(16px, 1.6667vw, 24px)',
                         }}
+                        initial={{ opacity: 0.8 }}
+                        whileHover={{
+                          opacity: 1,
+                          transition: { duration: 0.2 },
+                        }}
                       >
                         {principle.heading}
-                      </h3>
+                      </motion.h3>
 
-                      <p
+                      <motion.p
                         className="lg:max-w-[45.1389vw]"
                         style={{
                           fontSize: 'clamp(16px, 1.389vw, 20px)',
                         }}
+                        initial={{ opacity: 0.9 }}
+                        whileHover={{
+                          opacity: 1,
+                          transition: { duration: 0.2 },
+                        }}
                       >
                         {principle.content}
-                      </p>
-                    </div>
+                      </motion.p>
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
         </section>
       </div>
-    </div>
+    </motion.div>
   );
 }
