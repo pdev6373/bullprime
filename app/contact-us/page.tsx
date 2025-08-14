@@ -142,255 +142,259 @@ export default function ContactUs() {
   };
 
   return (
-    <motion.section
-      initial="hidden"
-      whileInView="visible"
-      // viewport={{ once: true, margin: '-100px' }}
-      variants={containerVariants}
-      className="bg-[#F8F8FE] text-[#010013] flex flex-col items-center"
+    <div
+      className="bg-[#F8F8FE] text-[#010013]"
       style={{
         gap: 'clamp(32px, 3.8889vw, 56px)',
         paddingInline: 'max(6.25vw, 20px)',
         paddingBlock: 'clamp(36px, 5.556vw, 80px)',
       }}
     >
-      <motion.div
-        variants={itemVariants}
-        className="flex flex-col items-center gap-5 sm:gap-6"
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        className="flex flex-col items-center"
+        viewport={{ once: true, margin: '-100px' }}
       >
         <motion.div
           variants={itemVariants}
-          className="flex items-center gap-2.5 sm:gap-4"
+          className="flex flex-col items-center gap-5 sm:gap-6"
         >
           <motion.div
-            className="flex items-center"
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            transition={{ type: 'spring', stiffness: 300 }}
+            variants={itemVariants}
+            className="flex items-center gap-2.5 sm:gap-4"
           >
-            <Image
-              alt="icon"
-              width={59}
-              height={27}
-              src="/svgs/section-icon.svg"
+            <motion.div
+              className="flex items-center"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+            >
+              <Image
+                alt="icon"
+                width={59}
+                height={27}
+                src="/svgs/section-icon.svg"
+                style={{
+                  width: 'clamp(30px, 3.33vw, 48px)',
+                }}
+              />
+            </motion.div>
+            <p
+              className="min-[400px]:text-lg xl:text-xl font-semibold"
               style={{
-                width: 'clamp(30px, 3.33vw, 48px)',
+                fontSize: 'clamp(16px, 1.389vw, 20px)',
               }}
-            />
-          </motion.div>
-          <p
-            className="min-[400px]:text-lg xl:text-xl font-semibold"
-            style={{
-              fontSize: 'clamp(16px, 1.389vw, 20px)',
-            }}
-          >
-            Contact Us
-          </p>
-        </motion.div>
-
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col items-center gap-2 text-center"
-        >
-          <h3
-            className="leading-snug font-semibold tracking-[-2%] max-w-[640px]"
-            style={{
-              fontSize: 'clamp(24px, 2.5vw, 36px)',
-            }}
-          >
-            Get In Touch
-          </h3>
-          <p
-            className="md:max-w-[51.389vw]"
-            style={{
-              fontSize: 'clamp(14px, 1.25vw, 18px)',
-            }}
-          >
-            {`Whether you're a business looking for skilled workers or a candidate
-            seeking your next opportunity, we're here to help. Reach out to us
-            today and let's start building your future.`}
-          </p>
-        </motion.div>
-      </motion.div>
-
-      <div className="flex flex-col-reverse lg:flex-row gap-10 w-full max-w-[1191px] mx-auto">
-        <motion.div
-          variants={mapVariants}
-          className="flex flex-col gap-6 lg:gap-7 flex-1 grow"
-        >
-          <motion.div
-            variants={containerVariants}
-            className="flex flex-col md:flex-row flex-wrap lg:flex-col gap-4 lg:gap-5 w-full justify-between"
-          >
-            {CONTACT.map((contact, index) => (
-              <motion.div
-                key={contact.title}
-                variants={itemVariants}
-                whileHover={{ y: -5, scale: 1.02 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-                className="flex flex-col gap-1.5 p-4 rounded-lg bg-white/50 backdrop-blur-sm hover:bg-white/70 transition-colors duration-300"
-              >
-                <h3
-                  className="font-semibold"
-                  style={{
-                    fontSize: 'clamp(16px, 1.3889vw, 20px)',
-                  }}
-                >
-                  {contact.title}
-                </h3>
-                <div className="flex flex-col gap-1">
-                  {contact.body.map((contact) => (
-                    <p
-                      className="max-w-[260px]"
-                      key={contact.content}
-                      style={{
-                        fontSize: 'clamp(14px, 1.111vw, 16px)',
-                      }}
-                    >
-                      {contact.content}
-                    </p>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+            >
+              Contact Us
+            </p>
           </motion.div>
 
           <motion.div
             variants={itemVariants}
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-            className="relative z-40 w-full grow rounded-2xl bg-[#DFDFDF] overflow-hidden shadow-lg"
-            style={{
-              aspectRatio: 1.207 / 1,
-            }}
+            className="flex flex-col items-center gap-2 text-center"
           >
-            <MapContainer
-              center={POSITION}
-              zoom={15}
-              scrollWheelZoom={false}
-              className="h-full w-full"
+            <h3
+              className="leading-snug font-semibold tracking-[-2%] max-w-[640px]"
+              style={{
+                fontSize: 'clamp(24px, 2.5vw, 36px)',
+              }}
             >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <Marker position={POSITION}>
-                <Popup>
-                  62 Tong Street, Suite 37
-                  <br />
-                  The Enterprise Hub
-                  <br />
-                  Bradford, BD4 9LX
-                </Popup>
-              </Marker>
-            </MapContainer>
+              Get In Touch
+            </h3>
+            <p
+              className="md:max-w-[51.389vw]"
+              style={{
+                fontSize: 'clamp(14px, 1.25vw, 18px)',
+              }}
+            >
+              {`Whether you're a business looking for skilled workers or a candidate
+            seeking your next opportunity, we're here to help. Reach out to us
+            today and let's start building your future.`}
+            </p>
           </motion.div>
         </motion.div>
 
-        <motion.form
-          variants={formVariants}
-          onSubmit={contactHandler}
-          className="flex flex-col gap-6 lg:gap-7 bg-white rounded-lg flex-1 grow-[1.1] shadow-lg"
-          style={{
-            padding: 'clamp(20px, 2.222vw, 32px)',
-          }}
-        >
+        <div className="flex flex-col-reverse lg:flex-row gap-10 w-full max-w-[1191px] mx-auto">
           <motion.div
-            variants={containerVariants}
-            className="flex flex-col gap-5 lg:gap-6"
+            variants={mapVariants}
+            className="flex flex-col gap-6 lg:gap-7 flex-1 grow"
           >
-            <motion.div variants={inputVariants}>
-              <Input
-                value={firstName}
-                className="grow"
-                label="First Name*"
-                placeholder="Enter first name"
-                onChange={(value) => setFirstName(value)}
-              />
+            <motion.div
+              variants={containerVariants}
+              className="flex flex-col md:flex-row flex-wrap lg:flex-col gap-4 lg:gap-5 w-full justify-between"
+            >
+              {CONTACT.map((contact, index) => (
+                <motion.div
+                  key={contact.title}
+                  variants={itemVariants}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                  className="flex flex-col gap-1.5 p-4 rounded-lg bg-white/50 backdrop-blur-sm hover:bg-white/70 transition-colors duration-300"
+                >
+                  <h3
+                    className="font-semibold"
+                    style={{
+                      fontSize: 'clamp(16px, 1.3889vw, 20px)',
+                    }}
+                  >
+                    {contact.title}
+                  </h3>
+                  <div className="flex flex-col gap-1">
+                    {contact.body.map((contact) => (
+                      <p
+                        className="max-w-[260px]"
+                        key={contact.content}
+                        style={{
+                          fontSize: 'clamp(14px, 1.111vw, 16px)',
+                        }}
+                      >
+                        {contact.content}
+                      </p>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
-            <motion.div variants={inputVariants}>
-              <Input
-                value={lastName}
-                className="grow"
-                label="Last Name*"
-                placeholder="Enter last name"
-                onChange={(value) => setLastName(value)}
-              />
-            </motion.div>
-            <motion.div variants={inputVariants}>
-              <Input
-                className="grow"
-                value={email}
-                label="Email Address*"
-                placeholder="Enter email address"
-                onChange={(value) => setEmail(value)}
-              />
-            </motion.div>
-            <motion.div variants={inputVariants}>
-              <Input
-                className="grow"
-                value={subject}
-                label="Subject*"
-                placeholder="Enter subject"
-                onChange={(value) => setSubject(value)}
-              />
-            </motion.div>
-            <motion.div variants={inputVariants}>
-              <Input
-                type="textarea"
-                value={message}
-                label="Your Message"
-                placeholder="Enter your message here"
-                onChange={(value) => setMessage(value)}
-              />
+
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              className="relative z-40 w-full grow rounded-2xl bg-[#DFDFDF] overflow-hidden shadow-lg"
+              style={{
+                aspectRatio: 1.207 / 1,
+              }}
+            >
+              <MapContainer
+                center={POSITION}
+                zoom={15}
+                scrollWheelZoom={false}
+                className="h-full w-full"
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={POSITION}>
+                  <Popup>
+                    62 Tong Street, Suite 37
+                    <br />
+                    The Enterprise Hub
+                    <br />
+                    Bradford, BD4 9LX
+                  </Popup>
+                </Marker>
+              </MapContainer>
             </motion.div>
           </motion.div>
 
-          <motion.button
-            variants={inputVariants}
-            whileHover={{
-              scale: isValid ? 1.02 : 1,
-              backgroundColor: isValid ? '#0f4fff' : undefined,
+          <motion.form
+            variants={formVariants}
+            onSubmit={contactHandler}
+            className="flex flex-col gap-6 lg:gap-7 bg-white rounded-lg flex-1 grow-[1.1] shadow-lg"
+            style={{
+              padding: 'clamp(20px, 2.222vw, 32px)',
             }}
-            whileTap={{ scale: isValid ? 0.98 : 1 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-            className="w-full rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 transition-opacity duration-300"
-            disabled={!isValid}
           >
-            Submit Form
-          </motion.button>
-
-          {isMessageSent && (
             <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{
-                type: 'spring',
-                stiffness: 300,
-                damping: 20,
-                delay: 0.1,
-              }}
-              className="bg-[#E7F6EC] rounded-lg p-4 flex flex-col gap-1 text-[#0F973D] text-center shadow-md"
+              variants={containerVariants}
+              className="flex flex-col gap-5 lg:gap-6"
             >
-              <motion.h3
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="text-lg font-medium tracking-[-2%]"
-              >
-                Thank you for reaching out.
-              </motion.h3>
-              <motion.p
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="text-sm"
-              >
-                Our team will get back to you shortly
-              </motion.p>
+              <motion.div variants={inputVariants}>
+                <Input
+                  value={firstName}
+                  className="grow"
+                  label="First Name*"
+                  placeholder="Enter first name"
+                  onChange={(value) => setFirstName(value)}
+                />
+              </motion.div>
+              <motion.div variants={inputVariants}>
+                <Input
+                  value={lastName}
+                  className="grow"
+                  label="Last Name*"
+                  placeholder="Enter last name"
+                  onChange={(value) => setLastName(value)}
+                />
+              </motion.div>
+              <motion.div variants={inputVariants}>
+                <Input
+                  className="grow"
+                  value={email}
+                  label="Email Address*"
+                  placeholder="Enter email address"
+                  onChange={(value) => setEmail(value)}
+                />
+              </motion.div>
+              <motion.div variants={inputVariants}>
+                <Input
+                  className="grow"
+                  value={subject}
+                  label="Subject*"
+                  placeholder="Enter subject"
+                  onChange={(value) => setSubject(value)}
+                />
+              </motion.div>
+              <motion.div variants={inputVariants}>
+                <Input
+                  type="textarea"
+                  value={message}
+                  label="Your Message"
+                  placeholder="Enter your message here"
+                  onChange={(value) => setMessage(value)}
+                />
+              </motion.div>
             </motion.div>
-          )}
-        </motion.form>
-      </div>
-    </motion.section>
+
+            <motion.button
+              variants={inputVariants}
+              whileHover={{
+                scale: isValid ? 1.02 : 1,
+                backgroundColor: isValid ? '#0f4fff' : undefined,
+              }}
+              whileTap={{ scale: isValid ? 0.98 : 1 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              className="w-full rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 transition-opacity duration-300"
+              disabled={!isValid}
+            >
+              Submit Form
+            </motion.button>
+
+            {isMessageSent && (
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 20,
+                  delay: 0.1,
+                }}
+                className="bg-[#E7F6EC] rounded-lg p-4 flex flex-col gap-1 text-[#0F973D] text-center shadow-md"
+              >
+                <motion.h3
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-lg font-medium tracking-[-2%]"
+                >
+                  Thank you for reaching out.
+                </motion.h3>
+                <motion.p
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-sm"
+                >
+                  Our team will get back to you shortly
+                </motion.p>
+              </motion.div>
+            )}
+          </motion.form>
+        </div>
+      </motion.section>
+    </div>
   );
 }
