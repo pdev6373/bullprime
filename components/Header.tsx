@@ -24,6 +24,8 @@ export default function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const pathname = usePathname();
 
+  const handleLinkClick = () => setShowMenu(false);
+
   return (
     <>
       <motion.header
@@ -159,6 +161,7 @@ export default function Header() {
                     >
                       <Link
                         href={route.route}
+                        onClick={handleLinkClick}
                         className={`capitalize text-black font-medium py-2 block rounded-lg hover:bg-blue-50 transition-all duration-200 overflow-hidden
                         ${
                           route.route == '/'
@@ -181,6 +184,7 @@ export default function Header() {
                 <motion.div transition={{ duration: 0.2 }}>
                   <Link
                     href="/contact-us"
+                    onClick={handleLinkClick}
                     className="w-full rounded-md bg-transparent p-3 cursor-pointer text-[#1462FF] font-medium outline-[1px] outline-[#1462FF] text-center block hover:bg-[#1462FF] hover:text-white transition-colors duration-300 active:bg-[#1462FF] active:text-white"
                   >
                     Contact Us
