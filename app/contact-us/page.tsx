@@ -151,8 +151,12 @@ export default function ContactUs() {
         variants={itemVariants}
         className="flex flex-col items-center gap-5 sm:gap-6"
       >
-        <motion.div variants={itemVariants} className="flex gap-2.5 sm:gap-4">
+        <motion.div
+          variants={itemVariants}
+          className="flex items-center gap-2.5 sm:gap-4"
+        >
           <motion.div
+            className="flex items-center"
             whileHover={{ scale: 1.1, rotate: 5 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
