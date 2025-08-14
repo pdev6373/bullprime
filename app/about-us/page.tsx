@@ -1,9 +1,9 @@
 'use client';
 import Image from 'next/image';
-import { motion, Variants, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import CTA from '@/components/CTA';
 import CoreValues from '@/components/CoreValues';
+import { motion, Variants, useInView } from 'framer-motion';
 
 type Service = {
   image: string;
@@ -96,66 +96,6 @@ const listItemVariants: Variants = {
   },
 };
 
-const SERVICES: Service[] = [
-  {
-    image: '/pngs/service-one.png',
-    heading: 'Construction Staffing',
-    content:
-      'Construction projects demand precision, safety, and skilled labour to meet tight deadlines. We supply workers who are not only qualified but also prepared to integrate seamlessly into your team. From large-scale developments to small, specialised builds, we provide the workforce to help you deliver exceptional results',
-    cta: 'hire-now',
-    offers: [
-      'General labourers and site operatives',
-      'Skilled tradespeople (electricians, plumbers, carpenters, bricklayers, etc.)',
-      'Site supervisors and foremen',
-      'Temporary, contract, and permanent placements',
-      'Workers with up-to-date CSCS certifications',
-    ],
-    reasons: [
-      'All candidates are pre-screened for skills and safety awareness',
-      'Flexible solutions for both short-term and long-term needs',
-      'Quick turnaround for urgent staffing requirements',
-    ],
-  },
-  {
-    image: '/pngs/service-two.png',
-    heading: 'Warehousing Staff',
-    content:
-      'A well-organised warehouse is the backbone of any logistics operation. We provide reliable, trained personnel to ensure your stock handling, storage, and distribution processes operate efficiently. Our candidates are ready to step into your workflow without disruption.',
-    cta: 'talk-to-us',
-    offers: [
-      'Pickers and packers',
-      'Forklift truck operators',
-      'Stock control and inventory management staff',
-      'Loaders and unloaders',
-      'Seasonal or shift-based teams for peak demand',
-    ],
-    reasons: [
-      'Staff trained in warehouse safety and efficiency',
-      'Flexible scheduling to match your operational needs',
-      'Capability to scale teams quickly during busy periods',
-    ],
-  },
-  {
-    image: '/pngs/service-three.png',
-    heading: 'Training & Compliance',
-    content:
-      "We believe a prepared workforce benefits everyone – businesses see improved performance, and workers feel more confident in their roles. That's why we invest in training and compliance support to make sure every candidate meets industry requirements before they start.",
-    cta: 'contact-now',
-    offers: [
-      'Health & safety protocols for construction and warehousing',
-      'CSCS card guidance and support',
-      'Manual handling best practices',
-      'Workplace hazard awareness',
-      'Ongoing upskilling for career development',
-    ],
-    reasons: [
-      'Reduces on-site risks and improves productivity',
-      'Ensures candidates meet legal and industry standards',
-      'Builds a stronger, more capable workforce',
-    ],
-  },
-];
-
 function useAnimateOnView() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
@@ -244,7 +184,7 @@ export default function AboutUs() {
           src="/svgs/rotate.svg"
           className="absolute left-[50%] bottom-0 translate-y-[50%] translate-x-[-50%] aspect-square"
           style={{
-            width: 'clamp(70px, 10.138vw, 146px)',
+            width: 'clamp(60px, 10.138vw, 146px)',
           }}
           animate={{
             rotate: 360,
