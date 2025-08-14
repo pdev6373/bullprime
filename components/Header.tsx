@@ -160,21 +160,21 @@ export default function Header() {
                       className="rounded-lg overflow-hidden"
                       whileTap={{
                         scale: 0.98,
-                        backgroundColor: 'bg-gray-100',
+                        backgroundColor: 'bg-blue-50',
                       }}
                     >
                       <Link
                         href={route.route}
                         onClick={handleLinkClick}
-                        className={`capitalize text-black font-medium py-2 block rounded-lg hover:bg-gray-100 transition-colors duration-200 overflow-hidden
+                        className={`capitalize text-black font-medium py-2 block rounded-lg hover:bg-blue-50 transition-colors duration-200 overflow-hidden
                         ${
                           route.route == '/'
                             ? pathname == '/' && route.route == '/'
-                              ? 'bg-gray-100 px-4'
+                              ? 'bg-blue-50 px-4'
                               : ''
                             : (pathname == '/' && route.route == '/') ||
                               pathname.includes(route.route)
-                            ? 'bg-gray-100 px-4'
+                            ? 'bg-blue-50 px-4'
                             : ''
                         }
                       `}
@@ -186,12 +186,12 @@ export default function Header() {
                 </nav>
 
                 <motion.div
-                  whileHover={{ scale: 1.02 }}
                   whileTap={{
                     scale: 0.98,
                     color: '#FFFFFF',
                     backgroundColor: '#1462FF',
                   }}
+                  whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
                 >
                   <Link
