@@ -102,7 +102,7 @@ export default function Header() {
             className="fixed inset-0 z-[60] bg-white md:hidden"
           >
             <motion.div
-              className="flex flex-col h-screen overflow-hidden"
+              className="flex flex-col h-[100svh] overflow-hidden"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%', opacity: 0 }}
