@@ -280,7 +280,7 @@ export default function Services() {
         <div
           className="flex flex-col w-full lg:max-w-[1185px] mx-auto"
           style={{
-            gap: 'clamp(36px, 5vw, 72px)',
+            gap: 'clamp(24px, 5vw, 72px)',
           }}
         >
           {SERVICES.map((service, index) => (

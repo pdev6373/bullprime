@@ -1,4 +1,30 @@
+'use client';
 import Image from 'next/image';
+import { motion, Variants } from 'framer-motion';
+
+const slideInRight: Variants = {
+  hidden: { x: 30, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 1,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+    },
+  },
+};
 
 const SERVICES = [
   {
@@ -53,27 +79,56 @@ export default function OurServices() {
           paddingInline: 'max(6.25vw, 20px)',
         }}
       >
-        <div className="w-full flex flex-col gap-6">
-          <div className="flex gap-2.5 sm:gap-4">
-            <Image
-              width={59}
-              height={27}
-              alt={'icon'}
-              src={'/svgs/section-icon-white.svg'}
-              className="w-8 min-[400px]:w-12 sm:w-[59px]"
-            />
-            <p className="min-[400px]:text-lg sm:text-xl font-semibold">
+        <div
+          className="w-full flex flex-col"
+          style={{
+            gap: 'clamp(20px, 1.6667vw, 24px)',
+          }}
+        >
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center gap-2.5 sm:gap-4"
+          >
+            <motion.div
+              className="flex items-center"
+              whileHover={{
+                scale: 1.1,
+                transition: { duration: 0.2 },
+              }}
+            >
+              <Image
+                alt="icon"
+                width={59}
+                height={27}
+                src="/svgs/section-icon-white.svg"
+                style={{
+                  width: 'clamp(24px, 3.33vw, 48px)',
+                }}
+              />
+            </motion.div>
+            <motion.p
+              variants={slideInRight}
+              className="min-[400px]:text-lg xl:text-xl font-semibold"
+              style={{
+                fontSize: 'clamp(16px, 1.389vw, 20px)',
+              }}
+            >
               Our Services
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="w-full mx-auto flex flex-col gap-12">
             <div className="flex justify-between items-end flex-wrap gap-6">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl leading-snug font-semibold tracking-[-2%] max-w-[640px]">
+              <h3
+                className="leading-snug font-semibold tracking-[-2%] sm:max-w-[64.44vw] md:max-w-[54.44vw] lg:max-w-[44.44vw]"
+                style={{
+                  fontSize: 'clamp(24px, 2.5vw, 36px)',
+                }}
+              >
                 We Provide the Workers You Need, and When You Need Them.
               </h3>
 
-              <button className="w-full sm:max-w-[207px] rounded-md bg-[#FAFAF7] text-[#010013] py-3 lg:py-4 px-5 lg:px-6 cursor-pointer text-sm sm:text-base lg:text-lg font-medium flex justify-center items-center gap-2.5">
+              <button className="w-full sm:max-w-[150px] rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5">
                 Contact Us
                 <Image
                   width={16}
@@ -85,8 +140,9 @@ export default function OurServices() {
             </div>
 
             <div
-              className="grid gap-5 sm:gap-6 grow"
+              className="grid grow"
               style={{
+                gap: 'clamp(20px, 1.6667vw, 24px)',
                 gridTemplateColumns:
                   'repeat(auto-fit, minmax(min(22em, 100%), 1fr))',
               }}
@@ -98,7 +154,11 @@ export default function OurServices() {
                     index % 2
                       ? 'bg-[#1462FF] flex-col-reverse'
                       : 'bg-[#2B2868] flex-col'
-                  } rounded-2xl sm:rounded-[20px] text-[#FAFAF7] overflow-hidden py-6 px-5 flex gap-4`}
+                  } rounded-2xl sm:rounded-[20px] text-[#FAFAF7] overflow-hidden flex gap-4`}
+                  style={{
+                    paddingInline: 'clamp(16px, 1.389vw, 20px)',
+                    paddingBlock: 'clamp(20px, 1.6667vw, 24px)',
+                  }}
                 >
                   <div
                     className="relative w-full rounded-2xl overflow-hidden"
@@ -114,9 +174,19 @@ export default function OurServices() {
                     />
                   </div>
 
-                  <div className="p-5 flex flex-col justify-between gap-4 border-[1px] border-[#FAFAF7] rounded-2xl grow">
-                    <div className="flex flex-col gap-2.5">
-                      <h3 className="text-lg sm:text-2xl font-semibold">
+                  <div
+                    className="flex flex-col justify-between gap-4 border-[1px] border-[#FAFAF7] rounded-2xl grow"
+                    style={{
+                      padding: 'clamp(16px, 1.389vw, 20px)',
+                    }}
+                  >
+                    <div className="flex flex-col gap-2">
+                      <h3
+                        className="font-semibold"
+                        style={{
+                          fontSize: 'clamp(16px, 1.389vw, 20px)',
+                        }}
+                      >
                         {service.heading}
                       </h3>
 
