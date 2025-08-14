@@ -64,7 +64,7 @@ export default function AboutUs() {
         }}
       >
         {ABOUT.map((about, index) => (
-          <div className="flex gap-6">
+          <div className="flex gap-6" key={index}>
             {!!index && (
               <div className="w-0.5 h-[185px] bg-[#B8D0FF] -ml-6 hidden md:block" />
             )}
