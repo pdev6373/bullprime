@@ -74,17 +74,6 @@ const fadeInUp: Variants = {
   },
 };
 
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
-  },
-};
-
 const listItemVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -192,13 +181,7 @@ export default function Services() {
             variants={itemVariants}
             className="items-center gap-2.5 sm:gap-4 hidden min-[405px]:flex"
           >
-            <motion.div
-              className="flex items-center"
-              whileHover={{
-                scale: 1.02,
-                transition: { duration: 0.3, ease: 'easeOut' },
-              }}
-            >
+            <motion.div className="flex items-center">
               <Image
                 alt="icon"
                 width={59}
@@ -359,10 +342,6 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
         padding: 'clamp(20px, 2.222vw, 32px)',
         gap: 'clamp(20px, 1.6667vw, 24px)',
       }}
-      whileHover={{
-        y: -2,
-        transition: { duration: 0.4, ease: 'easeOut' },
-      }}
     >
       <div
         className={`flex flex-col ${
@@ -376,7 +355,6 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
             width: 'clamp(500px, 43.47vw, 626px)',
             aspectRatio: 1.609 / 1,
           }}
-          whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.4 }}
         >
           <Image fill alt="cta" src={service.image} className="object-cover" />
@@ -400,10 +378,7 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
             gap: 'clamp(20px, 1.6667vw, 24px)',
           }}
         >
-          <motion.div
-            variants={staggerContainer}
-            className="flex flex-col gap-3"
-          >
+          <motion.div className="flex flex-col gap-3">
             <motion.h3
               variants={itemVariants}
               className="leading-snug font-semibold tracking-[-2%] max-w-[640px]"
@@ -478,15 +453,8 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
         style={{
           padding: 'clamp(20px, 1.6667vw, 24px)',
         }}
-        whileHover={{
-          scale: 1.01,
-          transition: { duration: 0.4 },
-        }}
       >
-        <motion.div
-          variants={staggerContainer}
-          className="flex-1 flex flex-col gap-2 min-[890px]:gap-3"
-        >
+        <motion.div className="flex-1 flex flex-col gap-2 min-[890px]:gap-3">
           <motion.h3
             variants={itemVariants}
             className="font-semibold text-[#010013]"
@@ -497,8 +465,8 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
             What we offer:
           </motion.h3>
 
-          <motion.ul variants={staggerContainer}>
-            {service.offers.map((offer: string, idx: number) => (
+          <motion.ul>
+            {service.offers.map((offer: string) => (
               <motion.li
                 key={offer}
                 variants={listItemVariants}
@@ -506,7 +474,6 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
                 style={{
                   fontSize: 'clamp(14px, 1.25vw, 18px)',
                 }}
-                whileHover={{ x: 2 }}
                 transition={{ duration: 0.3 }}
               >
                 {offer}
@@ -515,10 +482,7 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
           </motion.ul>
         </motion.div>
 
-        <motion.div
-          variants={staggerContainer}
-          className="flex-1 flex flex-col gap-2 min-[890px]:gap-3"
-        >
+        <motion.div className="flex-1 flex flex-col gap-2 min-[890px]:gap-3">
           <motion.h3
             variants={itemVariants}
             className="font-semibold text-[#010013]"
@@ -529,8 +493,8 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
             Why choose our construction staffing:
           </motion.h3>
 
-          <motion.ul variants={staggerContainer}>
-            {service.reasons.map((reason: string, idx: number) => (
+          <motion.ul>
+            {service.reasons.map((reason: string) => (
               <motion.li
                 key={reason}
                 variants={listItemVariants}
@@ -538,7 +502,6 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
                 style={{
                   fontSize: 'clamp(14px, 1.25vw, 18px)',
                 }}
-                whileHover={{ x: 2 }}
                 transition={{ duration: 0.3 }}
               >
                 {reason}
