@@ -87,7 +87,7 @@ export default function Services() {
         >
           <motion.div
             variants={itemVariants}
-            className="items-center gap-2.5 sm:gap-4 hidden min-[405]:flex"
+            className="items-center gap-2.5 sm:gap-4 hidden min-[405px]:flex"
           >
             <motion.div
               className="flex items-center"
@@ -123,7 +123,10 @@ export default function Services() {
             >
               Our Workforce Solutions
             </h3>
-            <p className="w-full md:max-w-[80vw] lg:max-w-[60vw] xl:max-w-[45.04vw] text-[10px] leading-[1.7] min-[405]:text-xs sm:text-sm lg:text-base">
+            <p className="leading-[1.7] min-[405px]:hidden text-xs">
+              {`At Bull Prime Services Ltd, we provide tailored recruitment solutions for the construction and warehousing sectors – ensuring you get skilled, reliable, and fully compliant workers when you need them most.`}
+            </p>
+            <p className="w-full md:max-w-[80vw] lg:max-w-[60vw] xl:max-w-[45.04vw] hidden min-[405px]:block leading-[1.7] min-[405px]:text-xs sm:text-sm lg:text-base">
               {`At Bull Prime Services Ltd, we understand that the right people can make all the difference in a business’s success. That’s why we provide tailored recruitment solutions for the construction and warehousing sectors – ensuring you get skilled, reliable, and fully compliant workers when you need them most.`}
             </p>
           </div>
