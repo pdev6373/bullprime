@@ -91,7 +91,7 @@ export default function Header() {
         <motion.div
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="relative w-7 aspect-square md:hidden cursor-pointer"
+          className="relative w-8 aspect-square md:hidden cursor-pointer"
           onClick={() => setShowMenu(true)}
         >
           <Image src="/svgs/hamburger.svg" alt="menu" fill />
@@ -140,7 +140,7 @@ export default function Header() {
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
                   transition={{ duration: 0.3 }}
-                  className="relative w-7 aspect-square cursor-pointer"
+                  className="relative w-8 aspect-square cursor-pointer"
                   onClick={() => setShowMenu(false)}
                 >
                   <Image src="/svgs/close.svg" alt="menu" fill />
