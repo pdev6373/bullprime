@@ -24,10 +24,7 @@ export default function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const pathname = usePathname();
 
-  const handleLinkClick = () => {
-    // Add a small delay before actually closing to show the active state
-    setTimeout(() => setShowMenu(false), 150);
-  };
+  const handleLinkClick = () => setTimeout(() => setShowMenu(false), 150);
 
   return (
     <>
@@ -163,13 +160,24 @@ export default function Header() {
                       className="rounded-lg overflow-hidden"
                       whileTap={{
                         scale: 0.98,
-                        backgroundColor: 'rgba(20, 98, 255, 0.1)',
+                        backgroundColor: 'bg-gray-100',
                       }}
                     >
                       <Link
                         href={route.route}
                         onClick={handleLinkClick}
-                        className="capitalize text-black font-medium py-2 block rounded-lg px-2 hover:bg-white transition-colors duration-200 active:bg-blue-50 overflow-hidden"
+                        className={`capitalize text-black font-medium py-2 block rounded-lg px-2 hover:bg-gray-100 transition-colors duration-200 overflow-hidden
+                        ${
+                          route.route == '/'
+                            ? pathname == '/' && route.route == '/'
+                              ? 'bg-gray-100'
+                              : ''
+                            : (pathname == '/' && route.route == '/') ||
+                              pathname.includes(route.route)
+                            ? 'bg-gray-100'
+                            : ''
+                        }
+                      `}
                       >
                         {route.title}
                       </Link>
@@ -181,8 +189,8 @@ export default function Header() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{
                     scale: 0.98,
-                    backgroundColor: '#1462FF',
                     color: '#FFFFFF',
+                    backgroundColor: '#1462FF',
                   }}
                   transition={{ duration: 0.2 }}
                 >
