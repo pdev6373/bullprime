@@ -121,7 +121,7 @@ export default function CoreValues() {
 
               <div className="flex flex-col md:flex-row gap-6 sm:gap-7 grow">
                 <div
-                  className="relative w-full rounded-2xl overflow-hidden md:max-w-[432px]"
+                  className="relative w-full rounded-2xl overflow-hidden flex-1 grow md:max-w-[432px]"
                   style={{
                     aspectRatio: 1 / 1.12,
                   }}
@@ -134,15 +134,20 @@ export default function CoreValues() {
                   />
                 </div>
 
-                <div className="flex flex-col gap-5 justify-between grow">
+                <div className="flex flex-col gap-5 justify-between flex-1 grow">
                   {PRINCIPLES.map((principle, index) => (
                     <div key={index} className="flex flex-col gap-2">
-                      <h3 className="text-lg sm:text-2xl font-semibold">
+                      <h3
+                        className="font-semibold"
+                        style={{
+                          fontSize: 'clamp(16px, 1.6667vw, 24px)',
+                        }}
+                      >
                         {principle.heading}
                       </h3>
 
                       <p
-                        className="max-w-[650px]"
+                        className="lg:max-w-[45.1389vw]"
                         style={{
                           fontSize: 'clamp(16px, 1.389vw, 20px)',
                         }}
