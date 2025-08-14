@@ -13,6 +13,10 @@ const QUICK_LINKS = [
     route: '/services',
   },
   {
+    title: 'Contact Us',
+    route: '/contact-us',
+  },
+  {
     title: 'Hire Workers',
     route: '/hire-workers',
   },
@@ -210,7 +214,7 @@ export default function Footer() {
             </motion.h2>
 
             <motion.div variants={containerVariants} className="flex flex-col">
-              {QUICK_LINKS.map((link, index) => (
+              {QUICK_LINKS.map((link) => (
                 <motion.div key={link.title} variants={linkVariants}>
                   <Link
                     href={link.route}
