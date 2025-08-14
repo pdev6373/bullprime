@@ -35,15 +35,17 @@ export default function Header() {
           boxShadow: '0px 2px 16px 0px #0000000D',
         }}
       >
-        <div
-          className="relative"
-          style={{
-            aspectRatio: 4.19 / 1,
-            width: 'clamp(110px, 10.486vw, 151px)',
-          }}
-        >
-          <Image src="/svgs/logo-black.svg" alt="logo" fill />
-        </div>
+        <Link href={'/'}>
+          <div
+            className="relative"
+            style={{
+              aspectRatio: 4.19 / 1,
+              width: 'clamp(110px, 10.486vw, 151px)',
+            }}
+          >
+            <Image src="/svgs/logo-black.svg" alt="logo" fill />
+          </div>
+        </Link>
 
         <nav className="hidden md:flex self-stretch gap-2">
           {ROUTES.map((route) => (

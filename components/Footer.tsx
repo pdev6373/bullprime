@@ -161,18 +161,20 @@ export default function Footer() {
           variants={itemVariants}
           className="flex flex-col gap-6 grow"
         >
-          <motion.div
-            variants={logoVariants}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-            className="relative"
-            style={{
-              aspectRatio: 4.23 / 1,
-              width: 'clamp(110px, 10.486vw, 151px)',
-            }}
-          >
-            <Image src="/svgs/logo-white.svg" alt="logo" fill />
-          </motion.div>
+          <Link href={'/'}>
+            <motion.div
+              variants={logoVariants}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              className="relative"
+              style={{
+                aspectRatio: 4.23 / 1,
+                width: 'clamp(110px, 10.486vw, 151px)',
+              }}
+            >
+              <Image src="/svgs/logo-white.svg" alt="logo" fill />
+            </motion.div>
+          </Link>
 
           <motion.div variants={itemVariants} className="flex flex-col gap-2">
             <motion.p variants={itemVariants}>Stay Connected</motion.p>
