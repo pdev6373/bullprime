@@ -156,7 +156,7 @@ export default function AboutHero() {
         src="/svgs/rotate.svg"
         className="absolute left-[50%] bottom-0 translate-y-[50%] translate-x-[-50%] aspect-square"
         style={{
-          width: 'clamp(75px, 10.138vw, 146px)',
+          width: 'clamp(70px, 10.138vw, 146px)',
         }}
         animate={{
           rotate: 360,
