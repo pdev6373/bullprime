@@ -55,14 +55,14 @@ export default function Header() {
             >
               <Link
                 href={route.route}
-                className={`capitalize text-black font-medium text-sm px-4 py-1.5 rounded-md hover:bg-gray-100 transition-colors duration-200 flex items-center ${
+                className={`capitalize text-black font-medium text-sm px-4 py-1.5 rounded-md hover:bg-blue-50 transition-colors duration-200 flex items-center ${
                   route.route == '/'
                     ? pathname == '/' && route.route == '/'
-                      ? 'bg-gray-100'
+                      ? 'bg-blue-50'
                       : ''
                     : (pathname == '/' && route.route == '/') ||
                       pathname.includes(route.route)
-                    ? 'bg-gray-100'
+                    ? 'bg-blue-50'
                     : ''
                 }`}
               >
