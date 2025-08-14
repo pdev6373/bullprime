@@ -77,7 +77,18 @@ const SERVICES = [
 export default function Services() {
   return (
     <div>
-      <div></div>
+      <div
+        className="bg-[url('/pngs/service-hero.png')] bg-cover bg-center"
+        style={{
+          aspectRatio: 1.83 / 1,
+        }}
+      >
+        <div className="flex items-end h-full">
+          <h1 className="text-white text-5xl font-bold">
+            Welcome to Our Website
+          </h1>
+        </div>
+      </div>
 
       <section
         className="bg-[#fff] text-[#0E0E0E] flex flex-col"
