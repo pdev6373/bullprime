@@ -6,6 +6,7 @@ import { LatLngExpression } from 'leaflet';
 import Input from '@/components/Form/Input';
 import { CONTACT } from '@/components/Footer';
 import { useState, useEffect, FormEvent } from 'react';
+import { motion, Variants } from 'framer-motion';
 
 const MapContainer = dynamic(
   () => import('react-leaflet').then((mod) => mod.MapContainer),
@@ -26,6 +27,68 @@ const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), {
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 const POSITION: LatLngExpression = [53.771948, -1.722736];
+
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const formVariants: Variants = {
+  hidden: { x: 50, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+      delay: 0.3,
+    },
+  },
+};
+
+const mapVariants: Variants = {
+  hidden: { x: -50, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut',
+      delay: 0.4,
+    },
+  },
+};
+
+const inputVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: 'easeOut',
+    },
+  },
+};
 
 export default function ContactUs() {
   const [email, setEmail] = useState('');
@@ -67,7 +130,11 @@ export default function ContactUs() {
   };
 
   return (
-    <section
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-100px' }}
+      variants={containerVariants}
       className="bg-[#F8F8FE] text-[#010013] flex flex-col items-center"
       style={{
         gap: 'clamp(32px, 3.8889vw, 56px)',
@@ -75,17 +142,25 @@ export default function ContactUs() {
         paddingBlock: 'clamp(36px, 5.556vw, 80px)',
       }}
     >
-      <div className="flex flex-col items-center gap-5 sm:gap-6">
-        <div className="flex gap-2.5 sm:gap-4">
-          <Image
-            alt="icon"
-            width={59}
-            height={27}
-            src="/svgs/section-icon.svg"
-            style={{
-              width: 'clamp(30px, 3.33vw, 48px)',
-            }}
-          />
+      <motion.div
+        variants={itemVariants}
+        className="flex flex-col items-center gap-5 sm:gap-6"
+      >
+        <motion.div variants={itemVariants} className="flex gap-2.5 sm:gap-4">
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+          >
+            <Image
+              alt="icon"
+              width={59}
+              height={27}
+              src="/svgs/section-icon.svg"
+              style={{
+                width: 'clamp(30px, 3.33vw, 48px)',
+              }}
+            />
+          </motion.div>
           <p
             className="min-[400px]:text-lg xl:text-xl font-semibold"
             style={{
@@ -94,9 +169,12 @@ export default function ContactUs() {
           >
             Contact Us
           </p>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col items-center gap-2 text-center">
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col items-center gap-2 text-center"
+        >
           <h3
             className="leading-snug font-semibold tracking-[-2%] max-w-[640px]"
             style={{
@@ -115,14 +193,26 @@ export default function ContactUs() {
             seeking your next opportunity, we're here to help. Reach out to us
             today and let's start building your future.`}
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       <div className="flex flex-col-reverse lg:flex-row gap-10 w-full max-w-[1191px] mx-auto">
-        <div className="flex flex-col gap-6 lg:gap-7 flex-1 grow">
-          <div className="flex flex-col md:flex-row flex-wrap lg:flex-col gap-4 lg:gap-5 w-full justify-between">
-            {CONTACT.map((contact) => (
-              <div className="flex flex-col gap-1.5" key={contact.title}>
+        <motion.div
+          variants={mapVariants}
+          className="flex flex-col gap-6 lg:gap-7 flex-1 grow"
+        >
+          <motion.div
+            variants={containerVariants}
+            className="flex flex-col md:flex-row flex-wrap lg:flex-col gap-4 lg:gap-5 w-full justify-between"
+          >
+            {CONTACT.map((contact, index) => (
+              <motion.div
+                key={contact.title}
+                variants={itemVariants}
+                whileHover={{ y: -5, scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+                className="flex flex-col gap-1.5 p-4 rounded-lg bg-white/50 backdrop-blur-sm hover:bg-white/70 transition-colors duration-300"
+              >
                 <h3
                   className="font-semibold"
                   style={{
@@ -144,12 +234,15 @@ export default function ContactUs() {
                     </p>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div
-            className="relative z-40 w-full grow rounded-2xl bg-[#DFDFDF] overflow-hidden"
+          <motion.div
+            variants={itemVariants}
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            className="relative z-40 w-full grow rounded-2xl bg-[#DFDFDF] overflow-hidden shadow-lg"
             style={{
               aspectRatio: 1.207 / 1,
             }}
@@ -174,71 +267,114 @@ export default function ContactUs() {
                 </Popup>
               </Marker>
             </MapContainer>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <form
+        <motion.form
+          variants={formVariants}
           onSubmit={contactHandler}
-          className="flex flex-col gap-6 lg:gap-7 bg-white rounded-lg flex-1 grow-[1.2]"
+          className="flex flex-col gap-6 lg:gap-7 bg-white rounded-lg flex-1 grow-[1.1] shadow-lg"
           style={{
             padding: 'clamp(20px, 2.222vw, 32px)',
           }}
         >
-          <div className="flex flex-col gap-5 lg:gap-6">
-            <Input
-              value={firstName}
-              className="grow"
-              label="First Name*"
-              placeholder="Enter first name"
-              onChange={(value) => setFirstName(value)}
-            />
-            <Input
-              value={lastName}
-              className="grow"
-              label="Last Name*"
-              placeholder="Enter last name"
-              onChange={(value) => setLastName(value)}
-            />
-            <Input
-              className="grow"
-              value={email}
-              label="Email Address*"
-              placeholder="Enter email address"
-              onChange={(value) => setEmail(value)}
-            />
-            <Input
-              className="grow"
-              value={subject}
-              label="Subject*"
-              placeholder="Enter subject"
-              onChange={(value) => setSubject(value)}
-            />
-            <Input
-              type="textarea"
-              value={message}
-              label="Your Message"
-              placeholder="Enter your message here"
-              onChange={(value) => setMessage(value)}
-            />
-          </div>
+          <motion.div
+            variants={containerVariants}
+            className="flex flex-col gap-5 lg:gap-6"
+          >
+            <motion.div variants={inputVariants}>
+              <Input
+                value={firstName}
+                className="grow"
+                label="First Name*"
+                placeholder="Enter first name"
+                onChange={(value) => setFirstName(value)}
+              />
+            </motion.div>
+            <motion.div variants={inputVariants}>
+              <Input
+                value={lastName}
+                className="grow"
+                label="Last Name*"
+                placeholder="Enter last name"
+                onChange={(value) => setLastName(value)}
+              />
+            </motion.div>
+            <motion.div variants={inputVariants}>
+              <Input
+                className="grow"
+                value={email}
+                label="Email Address*"
+                placeholder="Enter email address"
+                onChange={(value) => setEmail(value)}
+              />
+            </motion.div>
+            <motion.div variants={inputVariants}>
+              <Input
+                className="grow"
+                value={subject}
+                label="Subject*"
+                placeholder="Enter subject"
+                onChange={(value) => setSubject(value)}
+              />
+            </motion.div>
+            <motion.div variants={inputVariants}>
+              <Input
+                type="textarea"
+                value={message}
+                label="Your Message"
+                placeholder="Enter your message here"
+                onChange={(value) => setMessage(value)}
+              />
+            </motion.div>
+          </motion.div>
 
-          <button
-            className="w-full rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium disabled:cursor-not-allowed"
+          <motion.button
+            variants={inputVariants}
+            whileHover={{
+              scale: isValid ? 1.02 : 1,
+              backgroundColor: isValid ? '#0f4fff' : undefined,
+            }}
+            whileTap={{ scale: isValid ? 0.98 : 1 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            className="w-full rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 transition-opacity duration-300"
             disabled={!isValid}
           >
             Submit Form
-          </button>
+          </motion.button>
 
           {isMessageSent && (
-            <div className="bg-[#E7F6EC] rounded-lg p-4 flex flex-col gap-1 text-[#0F973D] text-center">
-              <h3 className="text-lg font-medium tracking-[-2%]">
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{
+                type: 'spring',
+                stiffness: 300,
+                damping: 20,
+                delay: 0.1,
+              }}
+              className="bg-[#E7F6EC] rounded-lg p-4 flex flex-col gap-1 text-[#0F973D] text-center shadow-md"
+            >
+              <motion.h3
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-lg font-medium tracking-[-2%]"
+              >
                 Thank you for reaching out.
-              </h3>
-              <p className="text-sm">Our team will get back to you shortly</p>
-            </div>
+              </motion.h3>
+              <motion.p
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="text-sm"
+              >
+                Our team will get back to you shortly
+              </motion.p>
+            </motion.div>
           )}
-        </form>
+        </motion.form>
       </div>
-    </section>
+    </motion.section>
   );
 }

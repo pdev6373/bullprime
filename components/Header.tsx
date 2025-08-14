@@ -51,17 +51,17 @@ export default function Header() {
           <Image src="/svgs/logo-black.svg" alt="logo" fill />
         </div>
 
-        <nav className="hidden md:flex">
+        <nav className="hidden md:flex self-stretch gap-2">
           {ROUTES.map((route) => (
             <motion.div
               key={route.title}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="rounded-md overflow-hidden"
+              className="rounded-md overflow-hidden flex items-center"
             >
               <Link
                 href={route.route}
-                className="capitalize text-black font-medium text-sm px-5 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200"
+                className="capitalize text-black font-medium text-sm px-4 py-1.5 rounded-md hover:bg-gray-100 transition-colors duration-200 flex items-center"
               >
                 {route.title}
               </Link>
