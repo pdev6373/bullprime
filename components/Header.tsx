@@ -21,8 +21,8 @@ const ROUTES = [
 ];
 
 export default function Header() {
-  const [showMenu, setShowMenu] = useState(false);
   const pathname = usePathname();
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleLinkClick = () => setShowMenu(false);
 
