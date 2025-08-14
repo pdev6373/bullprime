@@ -111,6 +111,7 @@ export default function Header() {
                 <Link
                   key={route.title}
                   href={route.route}
+                  onClick={() => setShowMenu(false)}
                   className="capitalize text-black font-medium py-2"
                 >
                   {route.title}
@@ -120,6 +121,7 @@ export default function Header() {
 
             <Link
               href="/contact-us"
+              onClick={() => setShowMenu(false)}
               className="w-full rounded-md bg-transparent p-3 cursor-pointer text-[#1462FF] font-medium outline-[1px] outline-[#1462FF] text-center"
             >
               Contact Us
