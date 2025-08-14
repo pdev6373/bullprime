@@ -77,14 +77,7 @@ const SERVICES = [
 export default function Services() {
   return (
     <div>
-      <div
-        className="bg-[url('/pngs/service-hero.png')] bg-cover bg-center aspect-[1/1] lg:aspect-[1.83/1]"
-        style={
-          {
-            // aspectRatio: 1.83 / 1,
-          }
-        }
-      >
+      <div className="bg-[url('/pngs/service-hero.png')] bg-cover bg-center aspect-[1/1] lg:aspect-[1.83/1]">
         <div className="flex items-end h-full">
           <h1 className="text-white text-5xl font-bold">
             Welcome to Our Website
