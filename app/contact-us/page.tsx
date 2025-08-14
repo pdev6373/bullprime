@@ -99,6 +99,11 @@ export default function ContactUs() {
   const [isMessageSent, setIsMessageSent] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+  }, []);
+
+  useEffect(() => {
     import('leaflet').then((L) => {
       delete (L.Icon.Default.prototype as { _getIconUrl?: () => string })
         ._getIconUrl;
