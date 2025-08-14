@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 const ROUTES = [
   {
@@ -21,15 +22,11 @@ const ROUTES = [
 
 export default function Header() {
   const [showMenu, setShowMenu] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
+  const pathname = usePathname();
 
   const handleLinkClick = () => {
-    setIsClosing(true);
     // Add a small delay before actually closing to show the active state
-    setTimeout(() => {
-      setShowMenu(false);
-      setIsClosing(false);
-    }, 150);
+    setTimeout(() => setShowMenu(false), 150);
   };
 
   return (
@@ -61,7 +58,16 @@ export default function Header() {
             >
               <Link
                 href={route.route}
-                className="capitalize text-black font-medium text-sm px-4 py-1.5 rounded-md hover:bg-gray-100 transition-colors duration-200 flex items-center"
+                className={`capitalize text-black font-medium text-sm px-4 py-1.5 rounded-md hover:bg-gray-100 transition-colors duration-200 flex items-center ${
+                  route.route == '/'
+                    ? pathname == '/' && route.route == '/'
+                      ? 'bg-gray-100'
+                      : ''
+                    : (pathname == '/' && route.route == '/') ||
+                      pathname.includes(route.route)
+                    ? 'bg-gray-100'
+                    : ''
+                }`}
               >
                 {route.title}
               </Link>
