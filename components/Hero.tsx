@@ -3,22 +3,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 
-const slideInRight: Variants = {
-  hidden: { x: 30, opacity: 0 },
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
   visible: {
-    x: 0,
     opacity: 1,
     transition: {
-      duration: 1,
-      ease: 'easeOut',
+      duration: 0.3,
+      staggerChildren: 0.1,
     },
   },
 };
 
-const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
+const slideInLeft: Variants = {
+  hidden: { x: -30, opacity: 0 },
   visible: {
-    y: 0,
+    x: 0,
     opacity: 1,
     transition: {
       duration: 0.8,
@@ -27,15 +26,14 @@ const itemVariants: Variants = {
   },
 };
 
-const textVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
+const slideInRight: Variants = {
+  hidden: { x: 30, opacity: 0 },
   visible: {
-    y: 0,
+    x: 0,
     opacity: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.8,
       ease: 'easeOut',
-      delay: 0.1,
     },
   },
 };
@@ -52,14 +50,61 @@ const fadeInUp: Variants = {
   },
 };
 
-const buttonVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
+const scaleIn: Variants = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const statsContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const statsItemVariants: Variants = {
+  hidden: { y: 10, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
       duration: 0.5,
       ease: 'easeOut',
+    },
+  },
+};
+
+const primaryButtonVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const secondaryButtonVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+      delay: 0.1,
     },
   },
 };
@@ -81,18 +126,25 @@ const STATS = [
 
 export default function Hero() {
   return (
-    <section
+    <motion.section
       className="bg-[#F8F8FE] flex flex-col justify-center text-[#010013]"
       style={{
         paddingInline: 'max(6.25vw, 20px)',
         paddingBlock: 'clamp(40px, 9.444vw, 136px)',
         gap: 'clamp(60px, 11.94vw, 172px)',
       }}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
     >
       <div className="flex justify-between items-center flex-col min-[920px]:flex-row w-full gap-7 min-[920px]:gap-0">
-        <div className="grow-[2] flex flex-col gap-5 w-full min-[920px]:w-auto flex-1">
+        <motion.div
+          className="grow-[2] flex flex-col gap-5 w-full min-[920px]:w-auto flex-1"
+          variants={slideInLeft}
+        >
           <motion.div
             className="flex items-center"
+            variants={scaleIn}
             whileHover={{
               scale: 1.1,
               transition: { duration: 0.2 },
@@ -109,50 +161,98 @@ export default function Hero() {
             />
           </motion.div>
 
-          <div className="flex flex-col gap-2">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl leading-snug font-semibold tracking-[-2%] max-w-[640px]">
+          <motion.div className="flex flex-col gap-2" variants={fadeInUp}>
+            <motion.h3
+              className="text-2xl sm:text-3xl lg:text-4xl leading-snug font-semibold tracking-[-2%] max-w-[640px]"
+              variants={fadeInUp}
+            >
               Connecting Skilled Workers with Businesses in Construction &
               Warehousing
-            </h3>
+            </motion.h3>
 
-            <p className="max-w-[591px] text-sm sm:text-base">
+            <motion.p
+              className="max-w-[591px] text-sm sm:text-base"
+              variants={fadeInUp}
+            >
               {`We provide reliable workforce solutions tailored to meet your needs – helping businesses grow and workers succeed.`}
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="flex gap-4 items-center text-sm sm:text-base lg:text-lg font-medium flex-wrap sm:flex-nowrap">
+          <motion.div
+            className="flex gap-4 items-center text-sm sm:text-base lg:text-lg font-medium flex-wrap sm:flex-nowrap"
+            variants={containerVariants}
+          >
             <Link href={'/request-workers-form'} className="w-full sm:w-fit">
-              <button className="w-full sm:w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-5 cursor-pointer text-sm outline-[1px] outline-[#1462FF]">
+              <motion.button
+                className="w-full sm:w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-5 cursor-pointer text-sm outline-[1px] outline-[#1462FF]"
+                variants={primaryButtonVariants}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: '#0F4FCC',
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{ scale: 0.98 }}
+              >
                 Work With Us
-              </button>
+              </motion.button>
             </Link>
             <Link href={'/skilled-workers-form'} className="w-full sm:w-fit">
-              <button className="w-full sm:w-fit rounded-md bg-transparent outline-[1px] outline-[#1462FF] py-3 px-5 cursor-pointer text-[#1462FF] text-sm">
+              <motion.button
+                className="w-full sm:w-fit rounded-md bg-transparent outline-[1px] outline-[#1462FF] py-3 px-5 cursor-pointer text-[#1462FF] text-sm"
+                variants={secondaryButtonVariants}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: '#1462FF',
+                  color: '#FAFAF7',
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{ scale: 0.98 }}
+              >
                 Hire Now
-              </button>
+              </motion.button>
             </Link>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:mt-1">
-            {STATS.map((stat) => (
-              <div className="flex items-center gap-1" key={stat.text}>
+          <motion.div
+            className="flex flex-wrap items-center gap-3 sm:gap-4 md:mt-1"
+            variants={statsContainerVariants}
+          >
+            {STATS.map((stat, index) => (
+              <motion.div
+                className="flex items-center gap-1"
+                key={stat.text}
+                variants={statsItemVariants}
+                whileHover={{
+                  scale: 1.05,
+                  transition: { duration: 0.2 },
+                }}
+              >
                 <Image alt="stat" width={16} height={16} src={stat.icon} />
                 <p className="text-xs font-medium text-[#676671]">
                   {stat.text}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="relative grow flex-1 w-full">
-          <Image
-            alt="cta"
-            width={626}
-            height={389}
-            src="/pngs/hero.png"
-            className="w-full rounded-[24px] min-[920px]:hidden aspect-[1.609/1] z-10"
-          />
+        <motion.div
+          className="relative grow flex-1 w-full"
+          variants={slideInRight}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
+          >
+            <Image
+              alt="cta"
+              width={626}
+              height={389}
+              src="/pngs/hero.png"
+              className="w-full rounded-[24px] min-[920px]:hidden aspect-[1.609/1] z-10"
+            />
+          </motion.div>
 
           <motion.img
             width={146}
@@ -178,32 +278,39 @@ export default function Hero() {
               paddingLeft: 'clamp(35px, 5.69vw, 73px)',
             }}
           >
-            <div
+            <motion.div
               className="relative grow hidden min-[920px]:block aspect-[1.609/1]"
               style={{
                 width: 'clamp(450px, 46.25vw, 626px)',
               }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
             >
               <Image
                 fill
                 alt="cta"
                 src="/pngs/hero.png"
-                className="object-cover"
+                className="object-cover rounded-[24px]"
               />
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
-      <div
+      <motion.div
         className="flex flex-col md:flex-row items-start w-full max-w-[1010px] mx-auto"
         style={{
           gap: 'clamp(20px, 1.6667vw, 24px)',
         }}
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
       >
         <motion.div
           className="flex gap-6 flex-wrap justify-between items-end min-[1200px]:items-start min-[1200px]:max-w-[500px] flex-1 grow"
-          variants={itemVariants}
+          variants={slideInLeft}
         >
           <div
             className="flex flex-col"
@@ -219,16 +326,25 @@ export default function Hero() {
               variants={fadeInUp}
             >
               It's Results that Matter,{' '}
-              <span className="text-[#1462FF]">Not just Promises</span>.
+              <motion.span
+                className="text-[#1462FF]"
+                initial={{ color: '#010013' }}
+                animate={{ color: '#1462FF' }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                Not just Promises
+              </motion.span>
+              .
             </motion.h3>
 
             <Link href={'/about-us'} className="w-full sm:w-fit">
               <motion.button
                 className="w-full sm:w-fit rounded-md bg-transparent outline-[1px] outline-[#1462FF] text-[#1462FF] py-3 px-6 cursor-pointer text-sm"
-                variants={buttonVariants}
+                variants={fadeInUp}
                 whileHover={{
                   scale: 1.05,
-                  backgroundColor: '#0F4FCC',
+                  backgroundColor: '#1462FF',
+                  color: '#FAFAF7',
                   transition: { duration: 0.2 },
                 }}
                 whileTap={{ scale: 0.98 }}
@@ -239,10 +355,15 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        <div
+        <motion.div
           className="relative hidden md:block aspect-[1/2.09] shrink-0"
           style={{
             width: 'clamp(80px, 3.025vw, 43.56px)',
+          }}
+          variants={scaleIn}
+          whileHover={{
+            scale: 1.1,
+            transition: { duration: 0.2 },
           }}
         >
           <Image
@@ -251,11 +372,14 @@ export default function Hero() {
             src="/svgs/hero-icon.svg"
             className="object-cover"
           />
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col gap-3 grow flex-1">
+        <motion.div
+          className="flex flex-col gap-3 grow flex-1"
+          variants={slideInRight}
+        >
           <motion.div
-            variants={itemVariants}
+            variants={fadeInUp}
             className="flex items-center gap-2.5 sm:gap-4"
           >
             <motion.div
@@ -276,7 +400,7 @@ export default function Hero() {
               />
             </motion.div>
             <motion.p
-              variants={slideInRight}
+              variants={fadeInUp}
               className="min-[400px]:text-lg xl:text-xl font-semibold"
               style={{
                 fontSize: 'clamp(16px, 1.389vw, 20px)',
@@ -291,17 +415,23 @@ export default function Hero() {
             style={{
               fontSize: 'clamp(16px, 1.25vw, 18px)',
             }}
-            variants={textVariants}
+            variants={fadeInUp}
           >
-            <motion.p variants={textVariants}>
+            <motion.p
+              variants={fadeInUp}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               At Bull Prime Services Ltd, we specialise in matching skilled
               professionals with businesses in the construction and warehousing
               industries. With a focus on training, compliance, and relationship
               building, we ensure every placement is a success.
             </motion.p>
           </motion.div>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 }
