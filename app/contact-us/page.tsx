@@ -401,13 +401,16 @@ export default function ContactUs() {
                   damping: 20,
                   delay: 0.1,
                 }}
-                className="bg-[#E7F6EC] rounded-lg p-4 flex flex-col gap-1 text-[#0F973D] text-center shadow-md"
+                className="bg-[#E7F6EC] rounded-md sm:rounded-lg p-3 sm:p-4 flex flex-col gap-1 text-[#0F973D] text-center shadow-md"
               >
                 <motion.h3
                   initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.2 }}
-                  className="text-lg font-medium tracking-[-2%]"
+                  className="font-medium tracking-[-2%]"
+                  style={{
+                    fontSize: 'clamp(14px, 1.25vw, 18px)',
+                  }}
                 >
                   Thank you for reaching out.
                 </motion.h3>
