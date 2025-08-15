@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
+import Link from 'next/link';
 
 const slideInRight: Variants = {
   hidden: { x: 30, opacity: 0 },
@@ -124,7 +125,8 @@ const SERVICES = [
     heading: 'Construction Staffing',
     content:
       'Building the right team for your projects. We supply skilled and semi-skilled workers for construction sites, ranging from general labourers to qualified tradespeople. Our candidates undergo thorough vetting to ensure they have the expertise and safety awareness required for demanding construction environments.',
-    cta: 'hire-now',
+    cta: 'learn-more',
+    link: '/services#construction-staffing',
   },
   {
     image: '/pngs/service-two.png',
@@ -132,13 +134,15 @@ const SERVICES = [
     content:
       'Reliable staffing for smooth supply chain operations. Our warehousing recruitment solutions ensure your logistics operations never face staff shortages. We supply trained personnel who can seamlessly integrate into your existing processes, improving efficiency and productivity',
     cta: 'learn-more',
+    link: '/services#warehousing-staff',
   },
   {
     image: '/pngs/service-three.png',
     heading: 'Training & Compliance',
     content:
       "Empowering workers with skills and certifications. We believe a prepared workforce is a successful workforce. That's why we offer training and compliance support to ensure candidates meet industry standards before stepping on site. This not only benefits businesses but also boosts workers' confidence and career growth.",
-    cta: 'call-us-now',
+    cta: 'learn-more',
+    link: '/services#training-and-compliance',
   },
 ];
 
@@ -237,26 +241,28 @@ export default function OurServices() {
                 We Provide the Workers You Need, and When You Need Them.
               </motion.h3>
 
-              <motion.button
-                className="w-full sm:max-w-[150px] rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5"
-                variants={buttonVariants}
-                initial="initial"
-                whileHover="hover"
-                whileTap="tap"
-              >
-                Contact Us
-                <motion.div
-                  whileHover={{ x: 3 }}
-                  transition={{ duration: 0.2 }}
+              <Link href="/contact-us">
+                <motion.button
+                  className="w-full sm:max-w-[150px] rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5"
+                  variants={buttonVariants}
+                  initial="initial"
+                  whileHover="hover"
+                  whileTap="tap"
                 >
-                  <Image
-                    width={16}
-                    height={16}
-                    alt="arrow right"
-                    src="/svgs/arrow-right.svg"
-                  />
-                </motion.div>
-              </motion.button>
+                  Contact Us
+                  <motion.div
+                    whileHover={{ x: 3 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Image
+                      width={16}
+                      height={16}
+                      alt="arrow right"
+                      src="/svgs/arrow-right.svg"
+                    />
+                  </motion.div>
+                </motion.button>
+              </Link>
             </motion.div>
 
             <motion.div
@@ -269,101 +275,103 @@ export default function OurServices() {
               variants={containerVariants}
             >
               {SERVICES.map((service, index) => (
-                <motion.div
-                  key={index}
-                  className={`${
-                    index % 2
-                      ? 'bg-[#1462FF] flex-col-reverse'
-                      : 'bg-[#2B2868] flex-col'
-                  } rounded-2xl sm:rounded-[20px] text-[#FAFAF7] overflow-hidden flex gap-4 cursor-pointer`}
-                  style={{
-                    paddingInline: 'clamp(16px, 1.389vw, 20px)',
-                    paddingBlock: 'clamp(20px, 1.6667vw, 24px)',
-                  }}
-                  variants={serviceCardVariants}
-                  whileHover="hover"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-50px' }}
-                  custom={index}
-                >
+                <Link href={service.link}>
                   <motion.div
-                    className="relative w-full rounded-2xl overflow-hidden"
+                    key={index}
+                    className={`${
+                      index % 2
+                        ? 'bg-[#1462FF] flex-col-reverse'
+                        : 'bg-[#2B2868] flex-col'
+                    } rounded-2xl sm:rounded-[20px] text-[#FAFAF7] overflow-hidden flex gap-4 cursor-pointer`}
                     style={{
-                      aspectRatio: 1.61 / 1,
+                      paddingInline: 'clamp(16px, 1.389vw, 20px)',
+                      paddingBlock: 'clamp(20px, 1.6667vw, 24px)',
                     }}
-                    variants={imageVariants}
+                    variants={serviceCardVariants}
+                    whileHover="hover"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: '-50px' }}
+                    custom={index}
                   >
-                    <Image
-                      fill
-                      alt="image"
-                      src={service.image}
-                      className="w-full object-cover"
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    className="flex flex-col justify-between gap-4 border-[1px] border-[#FAFAF7] rounded-2xl grow"
-                    style={{
-                      padding: 'clamp(16px, 1.389vw, 20px)',
-                    }}
-                    variants={contentVariants}
-                  >
-                    <div className="flex flex-col gap-2">
-                      <motion.h3
-                        className="font-semibold"
-                        style={{
-                          fontSize: 'clamp(16px, 1.389vw, 20px)',
-                        }}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                      >
-                        {service.heading}
-                      </motion.h3>
-
-                      <motion.div
-                        className="w-full h-[0.5px] bg-[#CCCCD0]"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '100%' }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, delay: 0.3 }}
-                      />
-
-                      <motion.p
-                        className="text-sm"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                      >
-                        {service.content}
-                      </motion.p>
-                    </div>
-
-                    <motion.button
-                      className="w-full sm:max-w-fit rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-4 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5 capitalize"
-                      variants={buttonVariants}
-                      initial="initial"
-                      whileHover="hover"
-                      whileTap="tap"
+                    <motion.div
+                      className="relative w-full rounded-2xl overflow-hidden"
+                      style={{
+                        aspectRatio: 1.61 / 1,
+                      }}
+                      variants={imageVariants}
                     >
-                      {service?.cta?.split('-').join(' ')}
-                      <motion.div
-                        whileHover={{ x: 3 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <Image
-                          width={16}
-                          height={16}
-                          alt="arrow right"
-                          src="/svgs/arrow-right.svg"
+                      <Image
+                        fill
+                        alt="image"
+                        src={service.image}
+                        className="w-full object-cover"
+                      />
+                    </motion.div>
+
+                    <motion.div
+                      className="flex flex-col justify-between gap-4 border-[1px] border-[#FAFAF7] rounded-2xl grow"
+                      style={{
+                        padding: 'clamp(16px, 1.389vw, 20px)',
+                      }}
+                      variants={contentVariants}
+                    >
+                      <div className="flex flex-col gap-2">
+                        <motion.h3
+                          className="font-semibold"
+                          style={{
+                            fontSize: 'clamp(16px, 1.389vw, 20px)',
+                          }}
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6, delay: 0.1 }}
+                        >
+                          {service.heading}
+                        </motion.h3>
+
+                        <motion.div
+                          className="w-full h-[0.5px] bg-[#CCCCD0]"
+                          initial={{ width: 0 }}
+                          whileInView={{ width: '100%' }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.8, delay: 0.3 }}
                         />
-                      </motion.div>
-                    </motion.button>
+
+                        <motion.p
+                          className="text-sm"
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6, delay: 0.4 }}
+                        >
+                          {service.content}
+                        </motion.p>
+                      </div>
+
+                      <motion.button
+                        className="w-full sm:max-w-fit rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-4 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5 capitalize"
+                        variants={buttonVariants}
+                        initial="initial"
+                        whileHover="hover"
+                        whileTap="tap"
+                      >
+                        {service?.cta?.split('-').join(' ')}
+                        <motion.div
+                          whileHover={{ x: 3 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <Image
+                            width={16}
+                            height={16}
+                            alt="arrow right"
+                            src="/svgs/arrow-right.svg"
+                          />
+                        </motion.div>
+                      </motion.button>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
+                </Link>
               ))}
             </motion.div>
           </div>

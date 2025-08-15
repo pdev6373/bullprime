@@ -61,12 +61,12 @@ const SOCIAL_LINKS = [
   {
     name: 'facebook',
     src: '/svgs/facebook.svg',
-    href: '',
+    href: 'https://www.facebook.com/profile.php?id=61578792181616',
   },
   {
     name: 'instagram',
     src: '/svgs/instagram.svg',
-    href: '',
+    href: 'https://www.instagram.com/bullprimeservices?igsh=MWlsbnc3NGp4MzJtZg==',
   },
 ];
 

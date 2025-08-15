@@ -340,6 +340,13 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
   return (
     <motion.div
+      id={
+        index == 0
+          ? 'construction-staffing'
+          : index == 1
+          ? 'warehousing-staff'
+          : 'training-and-compliance'
+      }
       ref={ref}
       variants={cardVariants}
       initial="hidden"

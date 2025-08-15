@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
+import Link from 'next/link';
 
 export default function CTA() {
   const containerVariants = {
@@ -75,29 +76,33 @@ export default function CTA() {
             className="flex gap-4 items-center text-sm sm:text-base lg:text-lg font-medium flex-wrap sm:flex-nowrap"
             variants={itemVariants}
           >
-            <motion.button
-              className="w-full sm:max-w-fit rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5"
-              whileHover={{
-                scale: 1.02,
-                boxShadow: '0 4px 20px rgba(250, 250, 247, 0.2)',
-                transition: { duration: 0.3 },
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Join as a worker
-            </motion.button>
+            <Link href={'/skilled-workers-form'}>
+              <motion.button
+                className="w-full sm:max-w-fit rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5"
+                whileHover={{
+                  scale: 1.02,
+                  boxShadow: '0 4px 20px rgba(250, 250, 247, 0.2)',
+                  transition: { duration: 0.3 },
+                }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Join as a worker
+              </motion.button>
+            </Link>
 
-            <motion.button
-              className="w-full sm:max-w-fit rounded-md bg-transparent outline-[1px] outline-[#FAFAF7] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5"
-              whileHover={{
-                scale: 1.02,
-                backgroundColor: 'rgba(250, 250, 247, 0.05)',
-                transition: { duration: 0.3 },
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Request for workers
-            </motion.button>
+            <Link href={'/request-workers-form'}>
+              <motion.button
+                className="w-full sm:max-w-fit rounded-md bg-transparent outline-[1px] outline-[#FAFAF7] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5"
+                whileHover={{
+                  scale: 1.02,
+                  backgroundColor: 'rgba(250, 250, 247, 0.05)',
+                  transition: { duration: 0.3 },
+                }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Request for workers
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
 

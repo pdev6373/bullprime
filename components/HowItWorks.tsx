@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
+import Link from 'next/link';
 
 const itemVariants: Variants = {
   hidden: { y: 20, opacity: 0 },
@@ -184,18 +185,20 @@ export default function HowItWorks() {
                 </motion.p>
               </div>
 
-              <motion.button
-                className="w-full sm:w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-10 cursor-pointer text-sm outline-[1px] outline-[#1462FF]"
-                variants={buttonVariants}
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: '#0F4FCC',
-                  transition: { duration: 0.2 },
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Hire Now
-              </motion.button>
+              <Link href={'/skilled-workers-form'}>
+                <motion.button
+                  className="w-full sm:w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-10 cursor-pointer text-sm outline-[1px] outline-[#1462FF]"
+                  variants={buttonVariants}
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: '#0F4FCC',
+                    transition: { duration: 0.2 },
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Hire Now
+                </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
 
@@ -277,18 +280,20 @@ export default function HowItWorks() {
               </motion.p>
             </div>
 
-            <motion.button
-              className="w-full sm:w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-10 cursor-pointer text-sm outline-[1px] outline-[#1462FF]"
-              variants={buttonVariants}
-              whileHover={{
-                scale: 1.05,
-                backgroundColor: '#0F4FCC',
-                transition: { duration: 0.2 },
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Work With Us
-            </motion.button>
+            <Link href={'/request-workers-form'}>
+              <motion.button
+                className="w-full sm:w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-10 cursor-pointer text-sm outline-[1px] outline-[#1462FF]"
+                variants={buttonVariants}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: '#0F4FCC',
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Work With Us
+              </motion.button>
+            </Link>
           </motion.div>
 
           <motion.div
