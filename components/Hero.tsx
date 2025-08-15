@@ -135,7 +135,7 @@ export default function Hero() {
 
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:mt-1">
             {STATS.map((stat) => (
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1" key={stat.text}>
                 <Image alt="stat" width={16} height={16} src={stat.icon} />
                 <p className="text-xs font-medium text-[#676671]">
                   {stat.text}
