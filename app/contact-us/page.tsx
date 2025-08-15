@@ -370,7 +370,7 @@ export default function ContactUs() {
                 <Input
                   type="textarea"
                   value={message}
-                  label="Your Message"
+                  label="Your Message*"
                   placeholder="Enter your message here"
                   onChange={(value) => setMessage(value)}
                 />
