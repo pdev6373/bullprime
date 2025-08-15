@@ -238,7 +238,7 @@ export default function OurServices() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
               >
-                We Provide the Workers You Need, and When You Need Them.
+                We Provide the Workers You Need, When You Need Them.
               </motion.h3>
 
               <Link href="/contact-us" className="w-full sm:max-w-[150px]">
