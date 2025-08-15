@@ -275,80 +275,84 @@ export default function OurServices() {
               variants={containerVariants}
             >
               {SERVICES.map((service, index) => (
-                <Link href={service.link} key={index}>
+                <motion.div
+                  key={index}
+                  className={`${
+                    index % 2
+                      ? 'bg-[#1462FF] flex-col-reverse'
+                      : 'bg-[#2B2868] flex-col'
+                  } rounded-2xl sm:rounded-[20px] text-[#FAFAF7] overflow-hidden flex gap-4 cursor-pointer`}
+                  style={{
+                    paddingInline: 'clamp(16px, 1.389vw, 20px)',
+                    paddingBlock: 'clamp(20px, 1.6667vw, 24px)',
+                  }}
+                  variants={serviceCardVariants}
+                  whileHover="hover"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-50px' }}
+                  custom={index}
+                >
                   <motion.div
-                    key={index}
-                    className={`${
-                      index % 2
-                        ? 'bg-[#1462FF] flex-col-reverse'
-                        : 'bg-[#2B2868] flex-col'
-                    } rounded-2xl sm:rounded-[20px] text-[#FAFAF7] overflow-hidden flex gap-4 cursor-pointer`}
+                    className="relative w-full rounded-2xl overflow-hidden"
                     style={{
-                      paddingInline: 'clamp(16px, 1.389vw, 20px)',
-                      paddingBlock: 'clamp(20px, 1.6667vw, 24px)',
+                      aspectRatio: 1.61 / 1,
                     }}
-                    variants={serviceCardVariants}
-                    whileHover="hover"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: '-50px' }}
-                    custom={index}
+                    variants={imageVariants}
                   >
-                    <motion.div
-                      className="relative w-full rounded-2xl overflow-hidden"
-                      style={{
-                        aspectRatio: 1.61 / 1,
-                      }}
-                      variants={imageVariants}
-                    >
-                      <Image
-                        fill
-                        alt="image"
-                        src={service.image}
-                        className="w-full object-cover"
+                    <Image
+                      fill
+                      alt="image"
+                      src={service.image}
+                      className="w-full object-cover"
+                    />
+                  </motion.div>
+
+                  <motion.div
+                    className="flex flex-col justify-between gap-4 border-[1px] border-[#FAFAF7] rounded-2xl grow"
+                    style={{
+                      padding: 'clamp(16px, 1.389vw, 20px)',
+                    }}
+                    variants={contentVariants}
+                  >
+                    <div className="flex flex-col gap-2">
+                      <motion.h3
+                        className="font-semibold"
+                        style={{
+                          fontSize: 'clamp(16px, 1.389vw, 20px)',
+                        }}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                      >
+                        {service.heading}
+                      </motion.h3>
+
+                      <motion.div
+                        className="w-full h-[0.5px] bg-[#CCCCD0]"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '100%' }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
                       />
-                    </motion.div>
 
-                    <motion.div
-                      className="flex flex-col justify-between gap-4 border-[1px] border-[#FAFAF7] rounded-2xl grow"
-                      style={{
-                        padding: 'clamp(16px, 1.389vw, 20px)',
-                      }}
-                      variants={contentVariants}
+                      <motion.p
+                        className="text-sm"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                      >
+                        {service.content}
+                      </motion.p>
+                    </div>
+
+                    <Link
+                      key={index}
+                      href={service.link}
+                      className="w-full sm:max-w-fit"
                     >
-                      <div className="flex flex-col gap-2">
-                        <motion.h3
-                          className="font-semibold"
-                          style={{
-                            fontSize: 'clamp(16px, 1.389vw, 20px)',
-                          }}
-                          initial={{ opacity: 0, y: 10 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.6, delay: 0.1 }}
-                        >
-                          {service.heading}
-                        </motion.h3>
-
-                        <motion.div
-                          className="w-full h-[0.5px] bg-[#CCCCD0]"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: '100%' }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.8, delay: 0.3 }}
-                        />
-
-                        <motion.p
-                          className="text-sm"
-                          initial={{ opacity: 0 }}
-                          whileInView={{ opacity: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.6, delay: 0.4 }}
-                        >
-                          {service.content}
-                        </motion.p>
-                      </div>
-
                       <motion.button
                         className="w-full sm:max-w-fit rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-4 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5 capitalize"
                         variants={buttonVariants}
@@ -369,9 +373,9 @@ export default function OurServices() {
                           />
                         </motion.div>
                       </motion.button>
-                    </motion.div>
+                    </Link>
                   </motion.div>
-                </Link>
+                </motion.div>
               ))}
             </motion.div>
           </div>
