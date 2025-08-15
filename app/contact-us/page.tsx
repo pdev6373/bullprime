@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import emailjs from 'emailjs-com';
 import 'leaflet/dist/leaflet.css';
 import dynamic from 'next/dynamic';
 import { LatLngExpression } from 'leaflet';
@@ -99,6 +100,7 @@ export default function ContactUs() {
   const [message, setMessage] = useState('');
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
+  const [loading, setLoading] = useState(false);
   const [isMessageSent, setIsMessageSent] = useState(false);
 
   useEffect(() => {
@@ -117,6 +119,10 @@ export default function ContactUs() {
     });
   }, []);
 
+  useEffect(() => {
+    setIsMessageSent(false);
+  }, [subject, message, lastName, firstName, email]);
+
   const isValid =
     subject.trim() &&
     message.trim() &&
@@ -129,7 +135,37 @@ export default function ContactUs() {
 
     if (!isValid) return;
 
-    setIsMessageSent(true);
+    setLoading(true);
+
+    emailjs
+      .send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          email,
+          subject,
+          message,
+          firstName,
+          lastName,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+      )
+      .then(
+        () => {
+          setEmail('');
+          setSubject('');
+          setMessage('');
+          setFirstName('');
+          setLastName('');
+          setTimeout(() => {
+            setIsMessageSent(true);
+          }, 100);
+        },
+        (err) => console.error(err),
+      )
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -352,10 +388,10 @@ export default function ContactUs() {
               className="w-full rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 transition-opacity duration-300"
               disabled={!isValid}
             >
-              Submit Form
+              {loading ? 'Submitting...' : 'Submit Form'}
             </motion.button>
 
-            {isMessageSent && (
+            {isMessageSent && !loading && (
               <motion.div
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
