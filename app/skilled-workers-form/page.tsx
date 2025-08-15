@@ -138,7 +138,7 @@ export default function SkilledWorkersForm() {
               fontSize: 'clamp(24px, 2.5vw, 36px)',
             }}
           >
-            Staffing Request Form
+            Request Skilled Workers
           </motion.h3>
           <motion.p
             className="md:max-w-[41.11vw]"
