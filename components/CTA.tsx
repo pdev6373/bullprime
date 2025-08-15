@@ -76,7 +76,10 @@ export default function CTA() {
             className="flex gap-4 items-center text-sm sm:text-base lg:text-lg font-medium flex-wrap sm:flex-nowrap"
             variants={itemVariants}
           >
-            <Link href={'/skilled-workers-form'}>
+            <Link
+              href={'/skilled-workers-form'}
+              className="w-full sm:max-w-fit"
+            >
               <motion.button
                 className="w-full sm:max-w-fit rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5"
                 whileHover={{
@@ -90,7 +93,10 @@ export default function CTA() {
               </motion.button>
             </Link>
 
-            <Link href={'/request-workers-form'}>
+            <Link
+              href={'/request-workers-form'}
+              className="w-full sm:max-w-fit"
+            >
               <motion.button
                 className="w-full sm:max-w-fit rounded-md bg-transparent outline-[1px] outline-[#FAFAF7] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5"
                 whileHover={{

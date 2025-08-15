@@ -241,7 +241,7 @@ export default function OurServices() {
                 We Provide the Workers You Need, and When You Need Them.
               </motion.h3>
 
-              <Link href="/contact-us">
+              <Link href="/contact-us" className="w-full sm:max-w-[150px]">
                 <motion.button
                   className="w-full sm:max-w-[150px] rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5"
                   variants={buttonVariants}
