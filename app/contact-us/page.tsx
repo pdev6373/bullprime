@@ -147,6 +147,7 @@ export default function ContactUs() {
           message,
           firstName,
           lastName,
+          time: new Date().toLocaleString(),
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
       )
