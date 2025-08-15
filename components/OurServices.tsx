@@ -275,7 +275,7 @@ export default function OurServices() {
               variants={containerVariants}
             >
               {SERVICES.map((service, index) => (
-                <Link href={service.link}>
+                <Link href={service.link} key={index}>
                   <motion.div
                     key={index}
                     className={`${
