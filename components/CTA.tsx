@@ -77,7 +77,7 @@ export default function CTA() {
             variants={itemVariants}
           >
             <Link
-              href={'/skilled-workers-form'}
+              href={'/request-workers-form'}
               className="w-full sm:max-w-fit"
             >
               <motion.button
@@ -94,7 +94,7 @@ export default function CTA() {
             </Link>
 
             <Link
-              href={'/request-workers-form'}
+              href={'/skilled-workers-form'}
               className="w-full sm:max-w-fit"
             >
               <motion.button
