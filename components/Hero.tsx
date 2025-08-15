@@ -325,7 +325,7 @@ export default function Hero() {
               }}
               variants={fadeInUp}
             >
-              It's Results that Matter,{' '}
+              {`It's Results that Matter,`}{' '}
               <motion.span
                 className="text-[#1462FF]"
                 initial={{ color: '#010013' }}
