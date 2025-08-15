@@ -127,7 +127,7 @@ export default function AboutHero() {
             variants={slideInLeft}
             className="font-semibold tracking-[-2%] leading-[1.3]"
             style={{
-              fontSize: 'clamp(20px, 3.33vw, 48px)',
+              fontSize: 'clamp(28px, 3.8889vw, 56px)',
             }}
           >
             Your Trusted Partner in Workforce Solutions
@@ -135,7 +135,7 @@ export default function AboutHero() {
 
           <motion.p
             variants={fadeInUp}
-            className="w-full md:max-w-[80vw] lg:max-w-[60vw] xl:max-w-[45.04vw] leading-[1.7] text-xs sm:text-sm lg:text-base hidden min-[400px]:block"
+            className="w-full md:max-w-[80vw] lg:max-w-[60vw] xl:max-w-[45.04vw] leading-[1.7] text-xs sm:text-sm lg:text-base xl:text-lg hidden min-[400px]:block"
           >
             {`At Bull Prime Services Ltd, we specialise in connecting skilled workers with leading businesses in the construction and warehousing sectors.`}
           </motion.p>

@@ -99,7 +99,7 @@ export default function CoreValues() {
   return (
     <motion.div
       id="our-services"
-      className="relative bg-[#131057] py-8 pb-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 text-[#FAFAF7] flex justify-center"
+      className="relative bg-[#fff] py-8 pb-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 text-[#010013] flex justify-center"
       style={{
         paddingInline: 'clamp(20px, 6.25vw, 90px)',
       }}
@@ -108,29 +108,6 @@ export default function CoreValues() {
       viewport={{ once: true, amount: 0.3 }}
     >
       <div className="w-full max-w-[1158px]">
-        <motion.div
-          className="absolute top-0 left-0 right-0 z-10"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
-          <Image
-            alt="cta"
-            width={1440}
-            height={28}
-            src="/svgs/line-one.svg"
-            className="w-full"
-          />
-          <Image
-            alt="cta"
-            width={1440}
-            height={28}
-            src="/svgs/line-two.svg"
-            className="w-full"
-          />
-        </motion.div>
-
         <section className="flex justify-center w-full">
           <div className="w-full flex flex-col gap-5">
             <motion.div
@@ -142,7 +119,7 @@ export default function CoreValues() {
                   alt="icon"
                   width={59}
                   height={27}
-                  src="/svgs/section-icon-white.svg"
+                  src="/svgs/section-icon-black.svg"
                   style={{
                     width: 'clamp(24px, 3.33vw, 48px)',
                   }}
@@ -183,10 +160,6 @@ export default function CoreValues() {
                     aspectRatio: 1 / 1.12,
                   }}
                   variants={scaleIn}
-                  whileHover={{
-                    scale: 1.02,
-                    transition: { duration: 0.3 },
-                  }}
                 >
                   <Image
                     fill
@@ -205,10 +178,6 @@ export default function CoreValues() {
                       key={index}
                       className="flex flex-col gap-2"
                       variants={principleVariants}
-                      whileHover={{
-                        x: 5,
-                        transition: { duration: 0.2 },
-                      }}
                     >
                       <motion.h3
                         className="font-semibold"
@@ -216,10 +185,7 @@ export default function CoreValues() {
                           fontSize: 'clamp(16px, 1.6667vw, 24px)',
                         }}
                         initial={{ opacity: 0.8 }}
-                        whileHover={{
-                          opacity: 1,
-                          transition: { duration: 0.2 },
-                        }}
+                        whileInView={{ opacity: 1 }}
                       >
                         {principle.heading}
                       </motion.h3>
@@ -230,10 +196,7 @@ export default function CoreValues() {
                           fontSize: 'clamp(16px, 1.389vw, 20px)',
                         }}
                         initial={{ opacity: 0.9 }}
-                        whileHover={{
-                          opacity: 1,
-                          transition: { duration: 0.2 },
-                        }}
+                        whileInView={{ opacity: 1 }}
                       >
                         {principle.content}
                       </motion.p>

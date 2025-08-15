@@ -83,7 +83,7 @@ const BUSINESS_STEPS = [
   },
   {
     heading: 'Interview and Hire',
-    content: 'Meet candidates, make offers and start immediately.',
+    content: 'We make offers and candidates start immediately.',
   },
   {
     heading: 'Work Starts',

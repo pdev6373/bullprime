@@ -220,7 +220,7 @@ export default function Services() {
               variants={slideInLeft}
               className="font-semibold tracking-[-2%] leading-[1.3]"
               style={{
-                fontSize: 'clamp(20px, 3.33vw, 48px)',
+                fontSize: 'clamp(28px, 3.8889vw, 56px)',
               }}
             >
               Our Workforce Solutions
@@ -233,7 +233,7 @@ export default function Services() {
             </motion.p>
             <motion.p
               variants={fadeInUp}
-              className="w-full md:max-w-[80vw] lg:max-w-[60vw] xl:max-w-[45.04vw] hidden min-[405px]:block leading-[1.7] min-[405px]:text-xs sm:text-sm lg:text-base"
+              className="w-full md:max-w-[80vw] lg:max-w-[60vw] xl:max-w-[50.04vw] hidden min-[405px]:block leading-[1.7] min-[405px]:text-xs sm:text-sm lg:text-base xl:text-lg"
             >
               {`At Bull Prime Services Ltd, we understand that the right people can make all the difference in a business's success. That's why we provide tailored recruitment solutions for the construction and warehousing sectors – ensuring you get skilled, reliable, and fully compliant workers when you need them most.`}
             </motion.p>

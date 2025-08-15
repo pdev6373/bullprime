@@ -95,7 +95,7 @@ export default function AboutUs() {
       <AboutHero />
 
       <motion.section
-        className="bg-[#fff] text-[#0E0E0E] grid gap-7 md:gap-12"
+        className="bg-[#F8F8FE] text-[#0E0E0E] grid gap-7 md:gap-12"
         style={{
           paddingInline: 'max(6.25vw, 20px)',
           paddingTop: 'clamp(30px, 9.72vw, 140px)',
@@ -185,9 +185,7 @@ export default function AboutUs() {
           </motion.div>
         ))}
       </motion.section>
-
       <CoreValues />
-      <CTA />
     </div>
   );
 }

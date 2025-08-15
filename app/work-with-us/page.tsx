@@ -172,8 +172,8 @@ export default function WorkWithUs() {
             Staffing Request Form
           </h3>
           <p className="text-sm">
-            Please provide details about your company and staffing requirements.
-            We'll match you with qualified candidates.
+            {`Please provide details about your company and staffing requirements.
+            We'll match you with qualified candidates.`}
           </p>
         </motion.div>
 
