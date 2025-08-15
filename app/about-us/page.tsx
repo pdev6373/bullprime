@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import CTA from '@/components/CTA';
 import AboutHero from '@/components/AboutHero';
 import CoreValues from '@/components/CoreValues';
 import { motion, Variants } from 'framer-motion';
