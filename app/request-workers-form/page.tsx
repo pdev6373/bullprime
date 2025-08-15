@@ -78,7 +78,7 @@ const buttonVariants: Variants = {
   },
 };
 
-export default function WorkWithUs() {
+export default function RequestWorkersForm() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [industry, setIndustry] = useState('');
@@ -138,7 +138,7 @@ export default function WorkWithUs() {
               fontSize: 'clamp(24px, 2.5vw, 36px)',
             }}
           >
-            Staffing Request Form
+            Join Our Skilled Worker Network
           </motion.h3>
           <motion.p
             className="md:max-w-[41.11vw]"
@@ -149,7 +149,8 @@ export default function WorkWithUs() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            {`Tell us about your staffing needs and we'll connect you with the right skilled professionals.`}
+            {`Take the next step in your career. Connect with top employers in
+            construction and warehousing.`}
           </motion.p>
         </motion.div>
       </div>
@@ -169,11 +170,11 @@ export default function WorkWithUs() {
               fontSize: 'clamp(16px, 1.25vw, 18px)',
             }}
           >
-            Staffing Request Form
+            Workers Registration Form
           </h3>
           <p className="text-sm">
-            {`Please provide details about your company and staffing requirements.
-            We'll match you with qualified candidates.`}
+            Please fill out all required fields. Our team will review your
+            application and contact you soon.
           </p>
         </motion.div>
 
@@ -203,7 +204,7 @@ export default function WorkWithUs() {
                   value={fullName}
                   className="grow"
                   label="Your Full Name*"
-                  placeholder="Ex. Bull Prime"
+                  placeholder="Ex. John Doe"
                   onChange={(value) => setFullName(value)}
                 />
               </motion.div>
@@ -215,8 +216,8 @@ export default function WorkWithUs() {
                 <Input
                   value={email}
                   className="grow"
-                  label="Contact Person Full Name*"
-                  placeholder="Ex John Doe"
+                  label="Your Email Address*"
+                  placeholder="example@gmail.com"
                   onChange={(value) => setEmail(value)}
                 />
               </motion.div>
@@ -306,7 +307,7 @@ export default function WorkWithUs() {
                   fontSize: 'clamp(14px, 1.25vw, 18px)',
                 }}
               >
-                Our Commitment
+                Privacy Notice
               </p>
               <p
                 className="tracking-[-2%]"
@@ -314,9 +315,9 @@ export default function WorkWithUs() {
                   fontSize: 'clamp(14px, 1.25vw, 18px)',
                 }}
               >
-                We guarantee thorough screening of all candidates and provide
-                ongoing support throughout the placement process. Your
-                satisfaction is our priority.
+                Your information will be kept confidential and used only for
+                recruitment purposes. We do not share personal data with third
+                parties without your consent.
               </p>
             </div>
           </motion.div>
@@ -337,7 +338,7 @@ export default function WorkWithUs() {
               initial={{ opacity: 0.8 }}
               animate={{ opacity: 1 }}
             >
-              Submit Request
+              Submit Application
             </motion.button>
           </motion.div>
         </form>

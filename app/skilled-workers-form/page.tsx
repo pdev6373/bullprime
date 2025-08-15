@@ -78,7 +78,7 @@ const buttonVariants: Variants = {
   },
 };
 
-export default function HireWorkers() {
+export default function SkilledWorkersForm() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [industry, setIndustry] = useState('');
@@ -138,7 +138,7 @@ export default function HireWorkers() {
               fontSize: 'clamp(24px, 2.5vw, 36px)',
             }}
           >
-            Join Our Skilled Worker Network
+            Staffing Request Form
           </motion.h3>
           <motion.p
             className="md:max-w-[41.11vw]"
@@ -149,8 +149,7 @@ export default function HireWorkers() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            {`Take the next step in your career. Connect with top employers in
-            construction and warehousing.`}
+            {`Tell us about your staffing needs and we'll connect you with the right skilled professionals.`}
           </motion.p>
         </motion.div>
       </div>
@@ -170,11 +169,11 @@ export default function HireWorkers() {
               fontSize: 'clamp(16px, 1.25vw, 18px)',
             }}
           >
-            Workers Registration Form
+            Staffing Request Form
           </h3>
           <p className="text-sm">
-            Please fill out all required fields. Our team will review your
-            application and contact you soon.
+            {`Please provide details about your company and staffing requirements.
+            We'll match you with qualified candidates.`}
           </p>
         </motion.div>
 
@@ -204,7 +203,7 @@ export default function HireWorkers() {
                   value={fullName}
                   className="grow"
                   label="Your Full Name*"
-                  placeholder="Ex. John Doe"
+                  placeholder="Ex. Bull Prime"
                   onChange={(value) => setFullName(value)}
                 />
               </motion.div>
@@ -216,8 +215,8 @@ export default function HireWorkers() {
                 <Input
                   value={email}
                   className="grow"
-                  label="Your Email Address*"
-                  placeholder="example@gmail.com"
+                  label="Contact Person Full Name*"
+                  placeholder="Ex John Doe"
                   onChange={(value) => setEmail(value)}
                 />
               </motion.div>
@@ -307,7 +306,7 @@ export default function HireWorkers() {
                   fontSize: 'clamp(14px, 1.25vw, 18px)',
                 }}
               >
-                Privacy Notice
+                Our Commitment
               </p>
               <p
                 className="tracking-[-2%]"
@@ -315,9 +314,9 @@ export default function HireWorkers() {
                   fontSize: 'clamp(14px, 1.25vw, 18px)',
                 }}
               >
-                Your information will be kept confidential and used only for
-                recruitment purposes. We do not share personal data with third
-                parties without your consent.
+                We guarantee thorough screening of all candidates and provide
+                ongoing support throughout the placement process. Your
+                satisfaction is our priority.
               </p>
             </div>
           </motion.div>
@@ -338,7 +337,7 @@ export default function HireWorkers() {
               initial={{ opacity: 0.8 }}
               animate={{ opacity: 1 }}
             >
-              Submit Application
+              Submit Request
             </motion.button>
           </motion.div>
         </form>

@@ -17,12 +17,12 @@ const QUICK_LINKS = [
     route: '/contact-us',
   },
   {
-    title: 'Hire Workers',
-    route: '/hire-workers',
+    title: 'Request Workers Form',
+    route: '/request-workers-form',
   },
   {
-    title: 'Work With Us',
-    route: '/work-with-us',
+    title: 'Skilled Workers Form',
+    route: '/skilled-workers-form',
   },
 ];
 
