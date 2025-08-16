@@ -1,8 +1,35 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import emailjs from 'emailjs-com';
+import { FormEvent, useState } from 'react';
 import Input from '@/components/Form/Input';
 import { motion, Variants } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+
+const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+const OPTIONS = [
+  {
+    label: 'Construction',
+    value: 'Construction',
+  },
+  {
+    label: 'Warehousing',
+    value: 'Warehousing',
+  },
+  {
+    label: 'Manufacturing',
+    value: 'Manufacturing',
+  },
+  {
+    label: 'Logistics',
+    value: 'Logistics',
+  },
+  {
+    label: 'Others',
+    value: 'Others',
+  },
+];
 
 const itemVariants: Variants = {
   hidden: { y: 30, opacity: 0 },
@@ -79,12 +106,60 @@ const buttonVariants: Variants = {
 };
 
 export default function WorkWithUs() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [loading, setLoading] = useState(false);
   const [industry, setIndustry] = useState('');
   const [fullName, setFullName] = useState('');
   const [experience, setExperience] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
+
+  const isValid =
+    EMAIL_REGEX.test(email.trim()) &&
+    fullName.trim() &&
+    phone.trim() &&
+    industry?.trim() &&
+    experience.trim();
+
+  const contactHandler = async (e?: FormEvent) => {
+    if (e) e.preventDefault();
+
+    if (!isValid) return;
+
+    setLoading(true);
+
+    emailjs
+      .send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_HIRE__TEMPLATE_ID!,
+        {
+          email,
+          phone,
+          industry,
+          fullName,
+          experience,
+          additionalInfo: additionalInfo || 'none',
+          time: new Date().toLocaleString(),
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+      )
+      .then(
+        () => {
+          setEmail('');
+          setPhone('');
+          setIndustry('');
+          setFullName('');
+          setExperience('');
+          setAdditionalInfo('');
+          router.push('/work-with-us/submitted');
+        },
+        (err) => console.error(err),
+      )
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
     <motion.section
@@ -217,7 +292,7 @@ export default function WorkWithUs() {
                   value={email}
                   className="grow"
                   label="Your Email Address*"
-                  placeholder="example@gmail.com"
+                  placeholder="Ex. example@gmail.com"
                   onChange={(value) => setEmail(value)}
                 />
               </motion.div>
@@ -228,7 +303,7 @@ export default function WorkWithUs() {
               className="flex flex-col md:flex-row gap-4"
             >
               <motion.div
-                className="grow"
+                className="flex-1 grow"
                 whileFocus={{ scale: 1.01 }}
                 transition={{ duration: 0.2 }}
               >
@@ -241,13 +316,15 @@ export default function WorkWithUs() {
                 />
               </motion.div>
               <motion.div
-                className="grow"
+                className="flex-1 grow"
                 whileFocus={{ scale: 1.01 }}
                 transition={{ duration: 0.2 }}
               >
                 <Input
+                  type="select"
                   className="grow"
                   value={industry}
+                  options={OPTIONS}
                   label="Primary Industry*"
                   placeholder="Select Industry"
                   onChange={(value) => setIndustry(value)}
@@ -263,7 +340,7 @@ export default function WorkWithUs() {
               <Input
                 type="textarea"
                 value={experience}
-                label="Specific Skills & Experience"
+                label="Specific Skills & Experience*"
                 onChange={(value) => setExperience(value)}
                 placeholder="Describe your skills, certifications and experience"
               />
@@ -324,7 +401,9 @@ export default function WorkWithUs() {
 
           <motion.div variants={buttonVariants}>
             <motion.button
-              className="w-full sm:max-w-[282px] rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium"
+              onClick={contactHandler}
+              disabled={!isValid}
+              className="w-full sm:max-w-[282px] rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50"
               whileHover={{
                 scale: 1.02,
                 backgroundColor: '#0F52E6',
@@ -338,7 +417,7 @@ export default function WorkWithUs() {
               initial={{ opacity: 0.8 }}
               animate={{ opacity: 1 }}
             >
-              Submit Application
+              {loading ? 'Submitting...' : 'Submit Application'}
             </motion.button>
           </motion.div>
         </form>

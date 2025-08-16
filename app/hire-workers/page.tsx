@@ -1,8 +1,35 @@
 'use client';
+import emailjs from 'emailjs-com';
 import Image from 'next/image';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Input from '@/components/Form/Input';
 import { motion, Variants } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+
+const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+const OPTIONS = [
+  {
+    label: 'Construction',
+    value: 'Construction',
+  },
+  {
+    label: 'Warehousing',
+    value: 'Warehousing',
+  },
+  {
+    label: 'Manufacturing',
+    value: 'Manufacturing',
+  },
+  {
+    label: 'Logistics',
+    value: 'Logistics',
+  },
+  {
+    label: 'Others',
+    value: 'Others',
+  },
+];
 
 const itemVariants: Variants = {
   hidden: { y: 30, opacity: 0 },
@@ -79,12 +106,68 @@ const buttonVariants: Variants = {
 };
 
 export default function HireWorkers() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [industry, setIndustry] = useState('');
   const [fullName, setFullName] = useState('');
-  const [experience, setExperience] = useState('');
-  const [additionalInfo, setAdditionalInfo] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [jobLocation, setJobLocation] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [neededSkills, setNeededSkills] = useState('');
+  const [additionalRequirements, setAdditionalRequirements] = useState('');
+
+  const isValid =
+    EMAIL_REGEX.test(email.trim()) &&
+    companyName.trim() &&
+    fullName.trim() &&
+    phone.trim() &&
+    industry?.trim() &&
+    jobLocation.trim() &&
+    neededSkills.trim();
+
+  const contactHandler = async (e?: FormEvent) => {
+    if (e) e.preventDefault();
+
+    if (!isValid) return;
+
+    setLoading(true);
+
+    emailjs
+      .send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_HIRE__TEMPLATE_ID!,
+        {
+          email,
+          companyName,
+          fullName,
+          phone,
+          industry,
+          jobLocation,
+          neededSkills,
+          additionalRequirements: additionalRequirements || 'none',
+          time: new Date().toLocaleString(),
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+      )
+      .then(
+        () => {
+          setEmail('');
+          setCompanyName('');
+          setPhone('');
+          setIndustry('');
+          setJobLocation('');
+          setFullName('');
+          setNeededSkills('');
+          setAdditionalRequirements('');
+          router.push('/hire-workers/submitted');
+        },
+        (err) => console.error(err),
+      )
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
     <motion.section
@@ -200,11 +283,11 @@ export default function HireWorkers() {
                 transition={{ duration: 0.2 }}
               >
                 <Input
-                  value={fullName}
+                  value={companyName}
                   className="grow"
-                  label="Your Full Name*"
+                  label="Company Name*"
                   placeholder="Ex. Bull Prime"
-                  onChange={(value) => setFullName(value)}
+                  onChange={(value) => setCompanyName(value)}
                 />
               </motion.div>
               <motion.div
@@ -213,11 +296,11 @@ export default function HireWorkers() {
                 transition={{ duration: 0.2 }}
               >
                 <Input
-                  value={email}
+                  value={fullName}
                   className="grow"
                   label="Contact Person Full Name*"
-                  placeholder="Ex John Doe"
-                  onChange={(value) => setEmail(value)}
+                  placeholder="Ex. John Doe"
+                  onChange={(value) => setFullName(value)}
                 />
               </motion.div>
             </motion.div>
@@ -233,10 +316,10 @@ export default function HireWorkers() {
               >
                 <Input
                   className="grow"
-                  value={phone}
-                  label="Phone Number*"
-                  placeholder="+1233456789"
-                  onChange={(value) => setPhone(value)}
+                  value={email}
+                  label="Email*"
+                  placeholder="Ex. example@gmail.com"
+                  onChange={(value) => setEmail(value)}
                 />
               </motion.div>
               <motion.div
@@ -246,10 +329,45 @@ export default function HireWorkers() {
               >
                 <Input
                   className="grow"
+                  value={phone}
+                  label="Phone Number*"
+                  placeholder="Ex. +1233456789"
+                  onChange={(value) => setPhone(value)}
+                />
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              variants={inputRowVariants}
+              className="flex flex-col md:flex-row gap-4"
+            >
+              <motion.div
+                className="flex-1 grow"
+                whileFocus={{ scale: 1.01 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Input
+                  type="select"
+                  className="grow"
                   value={industry}
+                  options={OPTIONS}
                   label="Primary Industry*"
                   placeholder="Select Industry"
                   onChange={(value) => setIndustry(value)}
+                />
+              </motion.div>
+
+              <motion.div
+                className="flex-1 grow"
+                whileFocus={{ scale: 1.01 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Input
+                  className="grow"
+                  value={jobLocation}
+                  label="Job Location*"
+                  placeholder="Ex. Manchester"
+                  onChange={(value) => setJobLocation(value)}
                 />
               </motion.div>
             </motion.div>
@@ -261,10 +379,10 @@ export default function HireWorkers() {
             >
               <Input
                 type="textarea"
-                value={experience}
-                label="Specific Skills & Experience"
-                onChange={(value) => setExperience(value)}
-                placeholder="Describe your skills, certifications and experience"
+                value={neededSkills}
+                label="Skills/Roles Needed*"
+                onChange={(value) => setNeededSkills(value)}
+                placeholder="Describe your roles and/or skills needed"
               />
             </motion.div>
 
@@ -275,9 +393,9 @@ export default function HireWorkers() {
             >
               <Input
                 type="textarea"
-                value={additionalInfo}
-                label="Additional Information (Optional)"
-                onChange={(value) => setAdditionalInfo(value)}
+                value={additionalRequirements}
+                label="Additional Requirement (Optional)"
+                onChange={(value) => setAdditionalRequirements(value)}
                 placeholder="Any other information you would love to share"
               />
             </motion.div>
@@ -323,7 +441,9 @@ export default function HireWorkers() {
 
           <motion.div variants={buttonVariants}>
             <motion.button
-              className="w-full sm:max-w-[282px] rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium"
+              onClick={contactHandler}
+              disabled={!isValid}
+              className="w-full sm:max-w-[282px] rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50"
               whileHover={{
                 scale: 1.02,
                 backgroundColor: '#0F52E6',
@@ -337,7 +457,7 @@ export default function HireWorkers() {
               initial={{ opacity: 0.8 }}
               animate={{ opacity: 1 }}
             >
-              Submit Request
+              {loading ? 'Submitting...' : 'Submit Request'}
             </motion.button>
           </motion.div>
         </form>

@@ -6,8 +6,8 @@ import dynamic from 'next/dynamic';
 import { LatLngExpression } from 'leaflet';
 import Input from '@/components/Form/Input';
 import { CONTACT } from '@/components/Footer';
-import { useState, useEffect, FormEvent } from 'react';
 import { motion, Variants } from 'framer-motion';
+import { useState, useEffect, FormEvent } from 'react';
 
 const MapContainer = dynamic(
   () => import('react-leaflet').then((mod) => mod.MapContainer),
@@ -32,7 +32,6 @@ const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 const POSITION: LatLngExpression = [53.771948, -1.722736];
 
-// Animation variants
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {

@@ -1,7 +1,7 @@
 'use client';
+import Link from 'next/link';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
-import Link from 'next/link';
 
 const itemVariants: Variants = {
   hidden: { y: 20, opacity: 0 },
@@ -120,7 +120,6 @@ export default function HowItWorks() {
       viewport={{ once: true, amount: 0.1 }}
     >
       <div className="w-full flex flex-col gap-12 sm:gap-16 lg:gap-24 xl:gap-28">
-        {/* Business Section */}
         <motion.div
           className="flex justify-between items-center flex-col min-[1200px]:flex-row gap-8 sm:gap-10 w-full min-[1200px]:max-w-[1152px] mx-auto"
           variants={containerVariants}
@@ -248,7 +247,6 @@ export default function HowItWorks() {
           </motion.div>
         </motion.div>
 
-        {/* Workers Section */}
         <motion.div
           className="w-full max-w-[815px] mx-auto flex flex-col gap-8"
           variants={containerVariants}
