@@ -78,7 +78,7 @@ const buttonVariants: Variants = {
   },
 };
 
-export default function SkilledWorkersForm() {
+export default function HireWorkers() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [industry, setIndustry] = useState('');

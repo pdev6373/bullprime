@@ -78,7 +78,7 @@ const buttonVariants: Variants = {
   },
 };
 
-export default function RequestWorkersForm() {
+export default function WorkWithUs() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [industry, setIndustry] = useState('');
@@ -204,7 +204,7 @@ export default function RequestWorkersForm() {
                   value={fullName}
                   className="grow"
                   label="Your Full Name*"
-                  placeholder="Ex. John Doe"
+                  placeholder="John Doe"
                   onChange={(value) => setFullName(value)}
                 />
               </motion.div>

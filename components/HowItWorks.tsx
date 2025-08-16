@@ -185,7 +185,7 @@ export default function HowItWorks() {
                 </motion.p>
               </div>
 
-              <Link href={'/skilled-workers-form'} className="w-full sm:w-fit">
+              <Link href={'/hire-workers'} className="w-full sm:w-fit">
                 <motion.button
                   className="w-full sm:w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-10 cursor-pointer text-sm outline-[1px] outline-[#1462FF]"
                   variants={buttonVariants}
@@ -280,7 +280,7 @@ export default function HowItWorks() {
               </motion.p>
             </div>
 
-            <Link href={'/request-workers-form'} className="w-full sm:w-fit">
+            <Link href={'/work-with-us'} className="w-full sm:w-fit">
               <motion.button
                 className="w-full sm:w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-10 cursor-pointer text-sm outline-[1px] outline-[#1462FF]"
                 variants={buttonVariants}

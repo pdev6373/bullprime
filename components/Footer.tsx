@@ -18,11 +18,11 @@ const QUICK_LINKS = [
   },
   {
     title: 'Hire Workers',
-    route: '/request-workers-form',
+    route: '/hire-workers',
   },
   {
     title: 'Work With Us',
-    route: '/skilled-workers-form',
+    route: '/work-with-us',
   },
 ];
 
