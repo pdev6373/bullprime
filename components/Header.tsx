@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -43,7 +42,7 @@ export default function Header() {
               width: 'clamp(110px, 10.486vw, 151px)',
             }}
           >
-            <Image src="/svgs/logo-black.svg" alt="logo" fill />
+            <img src="/svgs/logo-black.svg" alt="logo" />
           </div>
         </Link>
 
@@ -93,7 +92,7 @@ export default function Header() {
           className="relative w-8 aspect-square md:hidden cursor-pointer"
           onClick={() => setShowMenu(true)}
         >
-          <Image src="/svgs/hamburger.svg" alt="menu" fill />
+          <img src="/svgs/hamburger.svg" alt="menu" />
         </motion.div>
       </motion.header>
 
@@ -129,7 +128,7 @@ export default function Header() {
                     width: 'clamp(110px, 10.486vw, 151px)',
                   }}
                 >
-                  <Image src="/svgs/logo-black.svg" alt="logo" fill />
+                  <img src="/svgs/logo-black.svg" alt="logo" />
                 </div>
 
                 <motion.div
@@ -139,7 +138,7 @@ export default function Header() {
                   className="relative w-8 aspect-square cursor-pointer"
                   onClick={() => setShowMenu(false)}
                 >
-                  <Image src="/svgs/close.svg" alt="menu" fill />
+                  <img src="/svgs/close.svg" alt="menu" />
                 </motion.div>
               </div>
 

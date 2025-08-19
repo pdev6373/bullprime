@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 
 const itemVariants: Variants = {
@@ -139,7 +138,7 @@ export default function HowItWorks() {
                   transition: { duration: 0.2 },
                 }}
               >
-                <Image
+                <img
                   alt="icon"
                   width={59}
                   height={27}
@@ -233,7 +232,7 @@ export default function HowItWorks() {
                     fontSize: 'clamp(16px, 1.25vw, 18px)',
                   }}
                 >
-                  {index + 1} {step.heading}
+                  {index + 1}. {step.heading}
                 </motion.h3>
                 <motion.p
                   style={{
@@ -329,7 +328,7 @@ export default function HowItWorks() {
                       fontSize: 'clamp(16px, 1.25vw, 18px)',
                     }}
                   >
-                    {index + 1} {step.heading}
+                    {index + 1}. {step.heading}
                   </motion.h3>
                   <motion.p
                     style={{

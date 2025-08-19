@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 
 const itemVariants: Variants = {
@@ -115,7 +114,7 @@ export default function CoreValues() {
               className="items-center gap-2.5 sm:gap-4 hidden min-[405px]:flex"
             >
               <motion.div className="flex items-center" variants={scaleIn}>
-                <Image
+                <img
                   alt="icon"
                   width={59}
                   height={27}
@@ -161,8 +160,7 @@ export default function CoreValues() {
                   }}
                   variants={scaleIn}
                 >
-                  <Image
-                    fill
+                  <img
                     alt="image"
                     src={'/pngs/principle.png'}
                     className="w-full object-cover"

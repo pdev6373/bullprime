@@ -1,6 +1,6 @@
 'use client';
-import Image from 'next/image';
 import { motion, Variants, useInView } from 'framer-motion';
+import Link from 'next/link';
 import { useRef } from 'react';
 
 type Service = {
@@ -191,7 +191,7 @@ export default function Services() {
             className="items-center gap-2.5 sm:gap-4 hidden min-[405px]:flex"
           >
             <motion.div className="flex items-center">
-              <Image
+              <img
                 alt="icon"
                 width={59}
                 height={27}
@@ -373,7 +373,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           }}
           transition={{ duration: 0.4 }}
         >
-          <Image fill alt="cta" src={service.image} className="object-cover" />
+          <img alt="cta" src={service.image} className="object-cover" />
         </motion.div>
 
         <motion.div
@@ -384,7 +384,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
             aspectRatio: 1.609 / 1,
           }}
         >
-          <Image fill alt="cta" src={service.image} className="object-cover" />
+          <img alt="cta" src={service.image} className="object-cover" />
         </motion.div>
 
         <motion.div
@@ -417,47 +417,65 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
           <motion.div variants={itemVariants}>
             {index % 2 ? (
-              <motion.button
-                className="w-full sm:max-w-fit rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5 capitalize"
-                whileHover={{
-                  scale: 1.02,
-                  transition: { duration: 0.3 },
-                }}
+              <Link
+                href={
+                  service.cta.includes('contact')
+                    ? 'contact-us'
+                    : '/hire-workers'
+                }
+                className="w-full sm:max-w-fit"
               >
-                {service?.cta?.split('-').join(' ')}
-                <motion.div
-                  whileHover={{ x: 2 }}
-                  transition={{ duration: 0.3 }}
+                <motion.button
+                  className="w-full sm:max-w-fit rounded-md bg-[#FAFAF7] text-[#010013] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5 capitalize"
+                  whileHover={{
+                    scale: 1.02,
+                    transition: { duration: 0.3 },
+                  }}
                 >
-                  <Image
-                    width={16}
-                    height={16}
-                    alt="arrow right"
-                    src="/svgs/arrow-right.svg"
-                  />
-                </motion.div>
-              </motion.button>
+                  {service?.cta?.split('-').join(' ')}
+                  <motion.div
+                    whileHover={{ x: 2 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <img
+                      width={16}
+                      height={16}
+                      alt="arrow right"
+                      src="/svgs/arrow-right.svg"
+                    />
+                  </motion.div>
+                </motion.button>
+              </Link>
             ) : (
-              <motion.button
-                className="w-full sm:max-w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5 capitalize"
-                whileHover={{
-                  scale: 1.02,
-                  transition: { duration: 0.3 },
-                }}
+              <Link
+                href={
+                  service.cta.includes('contact')
+                    ? 'contact-us'
+                    : '/hire-workers'
+                }
+                className="w-full sm:max-w-fit"
               >
-                {service?.cta?.split('-').join(' ')}
-                <motion.div
-                  whileHover={{ x: 2 }}
-                  transition={{ duration: 0.3 }}
+                <motion.button
+                  className="w-full sm:max-w-fit rounded-md bg-[#1462FF] text-[#FAFAF7] py-3 px-5 cursor-pointer text-sm font-medium flex justify-center items-center gap-2.5 capitalize"
+                  whileHover={{
+                    scale: 1.02,
+                    transition: { duration: 0.3 },
+                  }}
                 >
-                  <Image
-                    width={16}
-                    height={16}
-                    alt="arrow right"
-                    src="/svgs/arrow-right-white.svg"
-                  />
-                </motion.div>
-              </motion.button>
+                  {service?.cta?.split('-').join(' ')}
+                  <motion.div
+                    whileHover={{ x: 2 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <img
+                      width={16}
+                      height={16}
+                      alt="arrow right"
+                      src="/svgs/arrow-right-white.svg"
+                    />
+                  </motion.div>
+                </motion.button>
+              </Link>
             )}
           </motion.div>
         </motion.div>

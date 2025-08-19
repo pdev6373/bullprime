@@ -1,13 +1,28 @@
 'use client';
-import Image from 'next/image';
 import emailjs from 'emailjs-com';
 import 'leaflet/dist/leaflet.css';
 import dynamic from 'next/dynamic';
 import { LatLngExpression } from 'leaflet';
 import Input from '@/components/Form/Input';
 import { CONTACT } from '@/components/Footer';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { motion, Variants } from 'framer-motion';
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, FormEvent, useRef } from 'react';
+import Error from '@/components/Form/Error';
+
+type Error = {
+  message: string;
+  field: keyof typeof ERRORS;
+};
+
+const ERRORS = {
+  captcha: ['Captcha is required'],
+  subject: ['Subject field is required'],
+  message: ['Message field is required'],
+  lastName: ['Last name field is required'],
+  firstName: ['First name field is required'],
+  email: ['Email field is required', 'Invalid email format'],
+};
 
 const MapContainer = dynamic(
   () => import('react-leaflet').then((mod) => mod.MapContainer),
@@ -98,9 +113,77 @@ export default function ContactUs() {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [lastName, setLastName] = useState('');
-  const [firstName, setFirstName] = useState('');
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [loading, setLoading] = useState(false);
+  const [touched, setTouched] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [errors, setErrors] = useState<Error[]>();
   const [isMessageSent, setIsMessageSent] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+
+  const getError = (field: keyof typeof ERRORS) =>
+    errors?.find((error) => error.field == field);
+
+  const updateError = (
+    field: keyof typeof ERRORS,
+    condition: boolean,
+    message: string,
+  ) => {
+    if (!touched) return;
+    setErrors((prev) => {
+      const filtered = prev ? prev.filter((e) => e.field !== field) : [];
+      if (condition) return [...filtered, { field, message }];
+      return filtered.length > 0 ? filtered : undefined;
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors: Error[] = [];
+
+    if (!firstName.trim())
+      newErrors.push({ field: 'firstName', message: ERRORS.firstName[0] });
+    if (!lastName.trim())
+      newErrors.push({ field: 'lastName', message: ERRORS.lastName[0] });
+    if (!subject.trim())
+      newErrors.push({ field: 'subject', message: ERRORS.subject[0] });
+    if (!message.trim())
+      newErrors.push({ field: 'message', message: ERRORS.message[0] });
+    if (!captchaToken?.trim())
+      newErrors.push({ field: 'captcha', message: ERRORS.captcha[0] });
+
+    if (!email.trim())
+      newErrors.push({ field: 'email', message: ERRORS.email[0] });
+    else if (!EMAIL_REGEX.test(email))
+      newErrors.push({ field: 'email', message: ERRORS.email[1] });
+
+    setErrors(newErrors.length > 0 ? newErrors : undefined);
+    return newErrors.length === 0;
+  };
+
+  useEffect(() => {
+    updateError('firstName', !firstName.trim(), ERRORS.firstName[0]);
+  }, [firstName]);
+
+  useEffect(() => {
+    updateError('lastName', !lastName.trim(), ERRORS.lastName[0]);
+  }, [lastName]);
+
+  useEffect(() => {
+    if (!email.trim()) updateError('email', true, ERRORS.email[0]);
+    else updateError('email', !EMAIL_REGEX.test(email), ERRORS.email[1]);
+  }, [email]);
+
+  useEffect(() => {
+    updateError('subject', !subject.trim(), ERRORS.subject[0]);
+  }, [subject]);
+
+  useEffect(() => {
+    updateError('message', !message.trim(), ERRORS.message[0]);
+  }, [message]);
+
+  useEffect(() => {
+    updateError('captcha', !captchaToken?.trim(), ERRORS.captcha[0]);
+  }, [captchaToken]);
 
   useEffect(() => {
     import('leaflet').then((L) => {
@@ -122,24 +205,26 @@ export default function ContactUs() {
     setIsMessageSent(false);
   }, [subject, message, lastName, firstName, email]);
 
-  const isValid =
-    subject.trim() &&
-    message.trim() &&
-    lastName.trim() &&
-    firstName?.trim() &&
-    EMAIL_REGEX.test(email);
-
   const contactHandler = async (e?: FormEvent) => {
     if (e) e.preventDefault();
 
+    setTouched(true);
+
+    const isValid = validateForm();
     if (!isValid) return;
+
+    if (!email.trim()) updateError('email', true, ERRORS.email[0]);
+    else updateError('email', !EMAIL_REGEX.test(email), ERRORS.email[1]);
+
+    const hasErrors = errors && errors.length > 0;
+    if (hasErrors) return;
 
     setLoading(true);
 
     emailjs
       .send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        'service_bekbvjj',
+        'template_dz7ndsn',
         {
           email,
           subject,
@@ -147,19 +232,25 @@ export default function ContactUs() {
           firstName,
           lastName,
           time: new Date().toLocaleString(),
+          'g-recaptcha-response': captchaToken,
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+        'dye1HuyesZvddJgOq',
       )
       .then(
         () => {
-          setEmail('');
-          setSubject('');
-          setMessage('');
-          setFirstName('');
-          setLastName('');
+          setTouched(false);
+          setTimeout(() => {
+            setEmail('');
+            setSubject('');
+            setMessage('');
+            setFirstName('');
+            setLastName('');
+            setCaptchaToken(null);
+            recaptchaRef.current?.reset();
+          }, 100);
           setTimeout(() => {
             setIsMessageSent(true);
-          }, 100);
+          }, 200);
         },
         (err) => console.error(err),
       )
@@ -199,7 +290,7 @@ export default function ContactUs() {
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <Image
+              <img
                 alt="icon"
                 width={59}
                 height={27}
@@ -335,7 +426,9 @@ export default function ContactUs() {
                   value={firstName}
                   className="grow"
                   label="First Name*"
-                  placeholder="Enter first name"
+                  placeholder="Ex. John"
+                  errorText={getError('firstName')?.message}
+                  showError={getError('firstName')?.field == 'firstName'}
                   onChange={(value) => setFirstName(value)}
                 />
               </motion.div>
@@ -344,7 +437,9 @@ export default function ContactUs() {
                   value={lastName}
                   className="grow"
                   label="Last Name*"
-                  placeholder="Enter last name"
+                  placeholder="Ex. Doe"
+                  errorText={getError('lastName')?.message}
+                  showError={getError('lastName')?.field == 'lastName'}
                   onChange={(value) => setLastName(value)}
                 />
               </motion.div>
@@ -353,7 +448,9 @@ export default function ContactUs() {
                   className="grow"
                   value={email}
                   label="Email Address*"
-                  placeholder="Enter email address"
+                  placeholder="Ex. example@gmail.com"
+                  errorText={getError('email')?.message}
+                  showError={getError('email')?.field == 'email'}
                   onChange={(value) => setEmail(value)}
                 />
               </motion.div>
@@ -362,6 +459,8 @@ export default function ContactUs() {
                   className="grow"
                   value={subject}
                   label="Subject*"
+                  errorText={getError('subject')?.message}
+                  showError={getError('subject')?.field == 'subject'}
                   placeholder="Enter subject"
                   onChange={(value) => setSubject(value)}
                 />
@@ -370,23 +469,33 @@ export default function ContactUs() {
                 <Input
                   type="textarea"
                   value={message}
-                  label="Your Message*"
+                  label="Message*"
+                  errorText={getError('message')?.message}
+                  showError={getError('message')?.field == 'message'}
                   placeholder="Enter your message here"
                   onChange={(value) => setMessage(value)}
                 />
               </motion.div>
             </motion.div>
 
+            <div className="flex flex-col">
+              <div className="recaptcha-container">
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  onChange={(token) => setCaptchaToken(token)}
+                  sitekey="6LfNSKgrAAAAABR5M5DPNB9zXdxUN-0VNbKvCXct"
+                />
+              </div>
+
+              {getError('captcha')?.field == 'captcha' && (
+                <Error text={getError('captcha')?.message} />
+              )}
+            </div>
+
             <motion.button
               variants={inputVariants}
-              whileHover={{
-                scale: isValid ? 1.02 : 1,
-                backgroundColor: isValid ? '#0f4fff' : undefined,
-              }}
-              whileTap={{ scale: isValid ? 0.98 : 1 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-              className="w-full rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 transition-opacity duration-300"
-              disabled={!isValid}
+              transition={{ type: 'spring', stiffness: 200, delay: 0 }}
+              className="w-full rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium transition-all duration-300 hover:bg-[#0f4fff] hover:scale-[100.5%]"
             >
               {loading ? 'Submitting...' : 'Submit Form'}
             </motion.button>

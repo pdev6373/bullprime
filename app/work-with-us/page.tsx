@@ -1,12 +1,27 @@
 'use client';
-import Image from 'next/image';
 import emailjs from 'emailjs-com';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import Input from '@/components/Form/Input';
 import { motion, Variants } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import ReCAPTCHA from 'react-google-recaptcha';
+import Error from '@/components/Form/Error';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+type Error = {
+  message: string;
+  field: keyof typeof ERRORS;
+};
+
+const ERRORS = {
+  captcha: ['Captcha is required'],
+  fullName: ['Full name field is required'],
+  email: ['Email field is required', 'Invalid email format'],
+  phone: ['Phone number field is required'],
+  industry: ['Industry field is required'],
+  experience: ['Specific Skills & Experience field is required'],
+};
 
 const OPTIONS = [
   {
@@ -16,10 +31,6 @@ const OPTIONS = [
   {
     label: 'Warehousing',
     value: 'Warehousing',
-  },
-  {
-    label: 'Manufacturing',
-    value: 'Manufacturing',
   },
   {
     label: 'Logistics',
@@ -109,30 +120,97 @@ export default function WorkWithUs() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [loading, setLoading] = useState(false);
   const [industry, setIndustry] = useState('');
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [fullName, setFullName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [touched, setTouched] = useState(false);
+  const [errors, setErrors] = useState<Error[]>();
   const [experience, setExperience] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
-  const isValid =
-    EMAIL_REGEX.test(email.trim()) &&
-    fullName.trim() &&
-    phone.trim() &&
-    industry?.trim() &&
-    experience.trim();
+  const getError = (field: keyof typeof ERRORS) =>
+    errors?.find((error) => error.field === field);
+
+  const updateError = (
+    field: keyof typeof ERRORS,
+    condition: boolean,
+    message: string,
+  ) => {
+    if (!touched) return;
+    setErrors((prev) => {
+      const filtered = prev ? prev.filter((e) => e.field !== field) : [];
+      if (condition) return [...filtered, { field, message }];
+      return filtered.length > 0 ? filtered : undefined;
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors: Error[] = [];
+
+    if (!fullName.trim())
+      newErrors.push({ field: 'fullName', message: ERRORS.fullName[0] });
+    if (!phone.trim())
+      newErrors.push({ field: 'phone', message: ERRORS.phone[0] });
+    if (!industry.trim())
+      newErrors.push({ field: 'industry', message: ERRORS.industry[0] });
+    if (!experience.trim())
+      newErrors.push({ field: 'experience', message: ERRORS.experience[0] });
+    if (!captchaToken?.trim())
+      newErrors.push({ field: 'captcha', message: ERRORS.captcha[0] });
+
+    if (!email.trim())
+      newErrors.push({ field: 'email', message: ERRORS.email[0] });
+    else if (!EMAIL_REGEX.test(email))
+      newErrors.push({ field: 'email', message: ERRORS.email[1] });
+
+    setErrors(newErrors.length > 0 ? newErrors : undefined);
+    return newErrors.length === 0;
+  };
+
+  useEffect(() => {
+    updateError('fullName', !fullName.trim(), ERRORS.fullName[0]);
+  }, [fullName, touched]);
+
+  useEffect(() => {
+    updateError('phone', !phone.trim(), ERRORS.phone[0]);
+  }, [phone, touched]);
+
+  useEffect(() => {
+    if (!email.trim()) updateError('email', true, ERRORS.email[0]);
+    else updateError('email', !EMAIL_REGEX.test(email), ERRORS.email[1]);
+  }, [email, touched]);
+
+  useEffect(() => {
+    updateError('industry', !industry.trim(), ERRORS.industry[0]);
+  }, [industry, touched]);
+
+  useEffect(() => {
+    updateError('experience', !experience.trim(), ERRORS.experience[0]);
+  }, [experience, touched]);
+
+  useEffect(() => {
+    updateError('captcha', !captchaToken?.trim(), ERRORS.captcha[0]);
+  }, [captchaToken, touched]);
 
   const contactHandler = async (e?: FormEvent) => {
     if (e) e.preventDefault();
 
+    setTouched(true);
+
+    const isValid = validateForm();
     if (!isValid) return;
+
+    const hasErrors = errors && errors.length > 0;
+    if (hasErrors) return;
 
     setLoading(true);
 
     emailjs
       .send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_HIRE__TEMPLATE_ID!,
+        'service_bekbvjj',
+        'template_4cvonfg',
         {
           email,
           phone,
@@ -141,18 +219,26 @@ export default function WorkWithUs() {
           experience,
           additionalInfo: additionalInfo || 'none',
           time: new Date().toLocaleString(),
+          'g-recaptcha-response': captchaToken,
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+        'dye1HuyesZvddJgOq',
       )
       .then(
         () => {
-          setEmail('');
-          setPhone('');
-          setIndustry('');
-          setFullName('');
-          setExperience('');
-          setAdditionalInfo('');
-          router.push('/work-with-us/submitted');
+          setTouched(false);
+          {
+            setTimeout(() => {
+              setEmail('');
+              setPhone('');
+              setIndustry('');
+              setFullName('');
+              setExperience('');
+              setAdditionalInfo('');
+              setCaptchaToken(null);
+              recaptchaRef.current?.reset();
+              router.push('/work-with-us/submitted');
+            }, 100);
+          }
         },
         (err) => console.error(err),
       )
@@ -183,7 +269,7 @@ export default function WorkWithUs() {
             whileTap={{ scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <Image
+            <img
               alt="icon"
               width={59}
               height={27}
@@ -254,7 +340,6 @@ export default function WorkWithUs() {
         </motion.div>
 
         <form
-          action=""
           className="flex flex-col"
           style={{
             gap: 'clamp(20px, 2.222vw, 32px)',
@@ -281,6 +366,8 @@ export default function WorkWithUs() {
                   label="Your Full Name*"
                   placeholder="John Doe"
                   onChange={(value) => setFullName(value)}
+                  showError={getError('fullName')?.field === 'fullName'}
+                  errorText={getError('fullName')?.message}
                 />
               </motion.div>
               <motion.div
@@ -294,6 +381,8 @@ export default function WorkWithUs() {
                   label="Your Email Address*"
                   placeholder="Ex. example@gmail.com"
                   onChange={(value) => setEmail(value)}
+                  showError={getError('email')?.field === 'email'}
+                  errorText={getError('email')?.message}
                 />
               </motion.div>
             </motion.div>
@@ -308,11 +397,14 @@ export default function WorkWithUs() {
                 transition={{ duration: 0.2 }}
               >
                 <Input
+                  type="tel"
                   className="grow"
                   value={phone}
                   label="Phone Number*"
                   placeholder="+1233456789"
                   onChange={(value) => setPhone(value)}
+                  showError={getError('phone')?.field === 'phone'}
+                  errorText={getError('phone')?.message}
                 />
               </motion.div>
               <motion.div
@@ -328,6 +420,8 @@ export default function WorkWithUs() {
                   label="Primary Industry*"
                   placeholder="Select Industry"
                   onChange={(value) => setIndustry(value)}
+                  showError={getError('industry')?.field === 'industry'}
+                  errorText={getError('industry')?.message}
                 />
               </motion.div>
             </motion.div>
@@ -343,6 +437,8 @@ export default function WorkWithUs() {
                 label="Specific Skills & Experience*"
                 onChange={(value) => setExperience(value)}
                 placeholder="Describe your skills, certifications and experience"
+                showError={getError('experience')?.field === 'experience'}
+                errorText={getError('experience')?.message}
               />
             </motion.div>
 
@@ -359,6 +455,19 @@ export default function WorkWithUs() {
                 placeholder="Any other information you would love to share"
               />
             </motion.div>
+
+            <div className="flex flex-col">
+              <div className="recaptcha-container">
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  onChange={(token) => setCaptchaToken(token)}
+                  sitekey="6LfNSKgrAAAAABR5M5DPNB9zXdxUN-0VNbKvCXct"
+                />
+              </div>
+              {getError('captcha')?.field === 'captcha' && (
+                <Error text={getError('captcha')?.message} />
+              )}
+            </div>
           </div>
 
           <motion.div
@@ -366,7 +475,7 @@ export default function WorkWithUs() {
             className="bg-[#F2F6FF] rounded-xl md:rounded-2xl p-4 flex items-start gap-2 text-[#1462FF]"
           >
             <motion.div transition={{ duration: 0.6 }} className="shrink-0">
-              <Image
+              <img
                 src="/svgs/info.svg"
                 alt="info"
                 width={24}
@@ -402,17 +511,12 @@ export default function WorkWithUs() {
           <motion.div variants={buttonVariants}>
             <motion.button
               onClick={contactHandler}
-              disabled={!isValid}
-              className="w-full sm:max-w-[282px] rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full sm:max-w-[282px] rounded-md bg-[#1462FF] py-4 cursor-pointer text-[#FAFAF7] text-sm font-medium"
               whileHover={{
                 scale: 1.02,
                 backgroundColor: '#0F52E6',
                 boxShadow: '0 8px 25px rgba(20, 98, 255, 0.3)',
                 transition: { duration: 0.2 },
-              }}
-              whileTap={{
-                scale: 0.98,
-                transition: { duration: 0.1 },
               }}
               initial={{ opacity: 0.8 }}
               animate={{ opacity: 1 }}

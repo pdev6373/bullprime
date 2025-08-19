@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 
 const itemVariants: Variants = {
@@ -48,33 +47,6 @@ const privacyVariants: Variants = {
     transition: {
       duration: 0.5,
       ease: 'easeOut',
-    },
-  },
-};
-
-const successIconVariants: Variants = {
-  hidden: { scale: 0, rotate: -180 },
-  visible: {
-    scale: 1,
-    rotate: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 200,
-      damping: 15,
-      delay: 0.4,
-    },
-  },
-};
-
-const checkmarkVariants: Variants = {
-  hidden: { pathLength: 0, opacity: 0 },
-  visible: {
-    pathLength: 1,
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      ease: 'easeInOut',
-      delay: 0.8,
     },
   },
 };
@@ -142,22 +114,6 @@ export default function WorkWithUsSubmitted() {
       }}
     >
       <motion.div
-        className="absolute inset-0 opacity-20"
-        animate={{
-          background: [
-            'radial-gradient(circle at 30% 70%, rgba(20, 98, 255, 0.15) 0%, transparent 50%)',
-            'radial-gradient(circle at 70% 30%, rgba(34, 197, 94, 0.15) 0%, transparent 50%)',
-            'radial-gradient(circle at 30% 70%, rgba(20, 98, 255, 0.15) 0%, transparent 50%)',
-          ],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-
-      <motion.div
         variants={itemVariants}
         className="flex items-center gap-2.5 sm:gap-4 relative z-10"
       >
@@ -167,7 +123,7 @@ export default function WorkWithUsSubmitted() {
           className="flex items-center"
           transition={{ type: 'spring', stiffness: 300 }}
         >
-          <Image
+          <img
             alt="icon"
             width={59}
             height={27}
@@ -203,40 +159,6 @@ export default function WorkWithUsSubmitted() {
           variants={itemVariants}
           className="flex flex-col items-center gap-4 text-center"
         >
-          <motion.div
-            variants={successIconVariants}
-            className="relative mb-1.5"
-          >
-            <motion.div
-              className="w-20 h-20 rounded-full bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center shadow-lg"
-              animate={{
-                boxShadow: [
-                  '0 0 20px rgba(34, 197, 94, 0.3)',
-                  '0 0 40px rgba(34, 197, 94, 0.5)',
-                  '0 0 20px rgba(34, 197, 94, 0.3)',
-                ],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            >
-              <motion.svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <motion.path variants={checkmarkVariants} d="M20 6L9 17l-5-5" />
-              </motion.svg>
-            </motion.div>
-          </motion.div>
-
           <motion.h3
             variants={titleVariants}
             className="leading-snug font-semibold tracking-[-2%] max-w-[640px]"
@@ -298,32 +220,6 @@ export default function WorkWithUsSubmitted() {
             ))}
           </motion.ul>
         </motion.div>
-
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={`confetti-${i}`}
-            className="absolute w-3 h-3 rounded-full"
-            style={{
-              backgroundColor: ['#22C55E', '#3B82F6', '#F59E0B', '#EF4444'][
-                i % 4
-              ],
-              top: '20%',
-              left: '50%',
-            }}
-            animate={{
-              y: [0, -100, 100],
-              x: [0, (i - 6) * 30, (i - 6) * 60],
-              rotate: [0, 360, 720],
-              opacity: [1, 0.8, 0],
-              scale: [1, 0.5, 0],
-            }}
-            transition={{
-              duration: 2,
-              delay: 0.5 + i * 0.1,
-              ease: 'easeOut',
-            }}
-          />
-        ))}
       </motion.div>
     </motion.section>
   );

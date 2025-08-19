@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 
@@ -161,14 +160,14 @@ export default function OurServices() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        <Image
+        <img
           alt="cta"
           width={1440}
           height={28}
           src="/svgs/line-one.svg"
           className="w-full"
         />
-        <Image
+        <img
           alt="cta"
           width={1440}
           height={28}
@@ -202,7 +201,7 @@ export default function OurServices() {
                 transition: { duration: 0.2 },
               }}
             >
-              <Image
+              <img
                 alt="icon"
                 width={59}
                 height={27}
@@ -254,7 +253,7 @@ export default function OurServices() {
                     whileHover={{ x: 3 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Image
+                    <img
                       width={16}
                       height={16}
                       alt="arrow right"
@@ -300,9 +299,8 @@ export default function OurServices() {
                     }}
                     variants={imageVariants}
                   >
-                    <Image
-                      fill
-                      alt="image"
+                    <img
+                      alt="service"
                       src={service.image}
                       className="w-full object-cover"
                     />
@@ -365,7 +363,7 @@ export default function OurServices() {
                           whileHover={{ x: 3 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <Image
+                          <img
                             width={16}
                             height={16}
                             alt="arrow right"

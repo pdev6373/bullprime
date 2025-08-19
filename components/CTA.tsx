@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 
@@ -107,7 +106,7 @@ export default function CTA() {
         </div>
 
         <motion.div variants={imageVariants}>
-          <Image
+          <img
             alt="cta"
             width={473}
             height={473}
@@ -124,7 +123,7 @@ export default function CTA() {
           }}
           variants={imageVariants}
         >
-          <Image fill alt="cta" src="/pngs/cta.png" className="object-cover" />
+          <img alt="cta" src="/pngs/cta.png" className="object-cover" />
         </motion.div>
       </motion.div>
     </section>

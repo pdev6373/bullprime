@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import AboutHero from '@/components/AboutHero';
 import CoreValues from '@/components/CoreValues';
 import { motion, Variants } from 'framer-motion';
@@ -131,7 +130,7 @@ export default function AboutUs() {
                     transition: { duration: 0.2 },
                   }}
                 >
-                  <Image
+                  <img
                     alt="icon"
                     width={59}
                     height={27}

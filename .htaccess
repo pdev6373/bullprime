@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# If request is not an existing file or directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# First try "path.html"
+RewriteRule ^(.+)$ $1.html [L]
+
+# If that doesn't exist, try "path/index.html"
+RewriteCond %{REQUEST_FILENAME}.html !-f
+RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+RewriteRule ^(.+)$ $1/index.html [L]

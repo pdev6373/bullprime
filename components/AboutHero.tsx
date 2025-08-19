@@ -1,6 +1,5 @@
 'use client';
 import { useRef } from 'react';
-import Image from 'next/image';
 import { motion, useInView, Variants } from 'framer-motion';
 
 const heroVariants: Variants = {
@@ -98,7 +97,7 @@ export default function AboutHero() {
           className="items-center gap-2.5 sm:gap-4 hidden min-[405px]:flex"
         >
           <motion.div className="flex items-center">
-            <Image
+            <img
               alt="icon"
               width={59}
               height={27}

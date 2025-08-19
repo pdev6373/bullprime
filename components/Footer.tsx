@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 
 const QUICK_LINKS = [
@@ -172,7 +171,7 @@ export default function Footer() {
                 width: 'clamp(110px, 10.486vw, 151px)',
               }}
             >
-              <Image src="/svgs/logo-white.svg" alt="logo" fill />
+              <img src="/svgs/logo-white.svg" alt="logo" />
             </motion.div>
           </Link>
 
@@ -194,12 +193,7 @@ export default function Footer() {
                   href={link.href}
                   custom={index}
                 >
-                  <Image
-                    src={link.src}
-                    alt={link.name}
-                    width={32}
-                    height={32}
-                  />
+                  <img src={link.src} alt={link.name} width={32} height={32} />
                 </motion.a>
               ))}
             </motion.div>

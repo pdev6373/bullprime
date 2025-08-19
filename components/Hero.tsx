@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 
 const containerVariants: Variants = {
@@ -150,7 +149,7 @@ export default function Hero() {
               transition: { duration: 0.2 },
             }}
           >
-            <Image
+            <img
               alt="icon"
               width={59}
               height={27}
@@ -227,7 +226,7 @@ export default function Hero() {
                   transition: { duration: 0.2 },
                 }}
               >
-                <Image alt="stat" width={16} height={16} src={stat.icon} />
+                <img alt="stat" width={16} height={16} src={stat.icon} />
                 <p className="text-xs font-medium text-[#676671]">
                   {stat.text}
                 </p>
@@ -245,7 +244,7 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
           >
-            <Image
+            <img
               alt="cta"
               width={626}
               height={389}
@@ -287,8 +286,7 @@ export default function Hero() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
             >
-              <Image
-                fill
+              <img
                 alt="cta"
                 src="/pngs/hero.png"
                 className="object-cover rounded-[24px]"
@@ -366,12 +364,7 @@ export default function Hero() {
             transition: { duration: 0.2 },
           }}
         >
-          <Image
-            fill
-            alt="hero"
-            src="/svgs/hero-icon.svg"
-            className="object-cover"
-          />
+          <img alt="hero" src="/svgs/hero-icon.svg" className="object-cover" />
         </motion.div>
 
         <motion.div
@@ -389,7 +382,7 @@ export default function Hero() {
                 transition: { duration: 0.2 },
               }}
             >
-              <Image
+              <img
                 alt="icon"
                 width={59}
                 height={27}

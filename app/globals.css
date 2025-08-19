@@ -31,3 +31,20 @@ body {
   scroll-padding-top: 180px;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.recaptcha-container {
+  transform: scale(0.85);
+  transform-origin: 0 0;
+}
+
+@media (max-width: 400px) {
+  .recaptcha-container {
+    transform: scale(0.75);
+  }
+}
+
+@media (max-width: 320px) {
+  .recaptcha-container {
+    transform: scale(0.65);
+  }
+}
